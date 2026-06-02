@@ -158,7 +158,7 @@ header {
 /* Texto vazio */
 .texto-vazio {
     color: #777;
-}/* Mobile responsive base */
+/* Mobile responsive base */
 @media (max-width: 900px) {
   html, body {
     min-width: 0;
@@ -177,6 +177,7 @@ header {
   main,
   section,
   aside,
+  nav,
   .layout,
   .carrinho-container,
   .produtos-container,
@@ -190,21 +191,35 @@ header {
   .cardapio-container,
   .painel,
   .container,
-  .content {
+  .content,
+  .wrapper,
+  .grid,
+  .top-cards,
+  .middle-cards,
+  .dashboard-grid,
+  .card,
+  .produto-card,
+  .tabela,
+  .item-carrinho {
     width: 100% !important;
+    max-width: 100% !important;
     margin: 0 auto !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
 
-  .layout {
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .produtos-container {
-    display: grid !important;
+  .layout,
+  .top-cards,
+  .middle-cards,
+  .filtros,
+  .cards-grid,
+  .row,
+  .grid,
+  .dashboard-grid,
+  .form-row {
+    display: block !important;
     grid-template-columns: 1fr !important;
+    gap: 16px !important;
   }
 
   .filtros {
@@ -224,14 +239,14 @@ header {
   select,
   textarea {
     width: 100% !important;
-    min-height: 44px;
-    font-size: 1rem;
+    min-height: 44px !important;
+    font-size: 1rem !important;
   }
 
   table {
     width: 100% !important;
-    display: block;
-    overflow-x: auto;
+    display: block !important;
+    overflow-x: auto !important;
   }
 
   th,
@@ -245,21 +260,75 @@ header {
   .kpi-card,
   .chart-box,
   .tabela,
-  .card {
-    flex-direction: column;
+  .card,
+  .sugestao-card,
+  .sugestao-content,
+  .middle-card,
+  .controles-qtd,
+  .usuario-info,
+  .produtos-container,
+  .painel,
+  .modal,
+  .modal-content {
+    flex-direction: column !important;
   }
 
   .modal {
-    padding: 10px 0;
+    padding: 10px 0 !important;
   }
 
   .modal-content {
-    max-height: calc(100vh - 20px);
-    overflow-y: auto;
+    max-height: calc(100vh - 20px) !important;
+    overflow-y: auto !important;
   }
 
   .carrinho-container {
-    position: static;
-    top: auto;
+    position: static !important;
+    top: auto !important;
+  }
+
+  img,
+  svg,
+  video,
+  iframe,
+  .produto-img,
+  .produto-img-placeholder,
+  .preview,
+  .preview-img {
+    max-width: 100% !important;
+    height: auto !important;
   }
 }
+
+@media (max-width: 600px) {
+  html, body {
+    padding: 8px;
+  }
+
+  .layout,
+  .filtros,
+  .top-cards,
+  .middle-cards,
+  .row,
+  .grid {
+    gap: 12px !important;
+  }
+
+  header {
+    padding-bottom: 12px !important;
+  }
+
+  .sugestao-card,
+  .card,
+  .btn-acao,
+  .produto-footer,
+  .produto-content {
+    padding: 12px !important;
+  }
+
+  .produto-img,
+  .produto-img-placeholder {
+    height: auto !important;
+  }
+}
+
