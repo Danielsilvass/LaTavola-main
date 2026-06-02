@@ -519,3 +519,31 @@ header {
   }
 }
 
+@media (max-width: 900px) {
+  body {
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .layout {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+  }
+
+  .filtros {
+    display: flex !important;
+    justify-content: center !important;
+    overflow-x: auto !important;
+    gap: 10px !important;
+    padding-bottom: 10px !important;
+  }
+
+  .carrinho-container {
+    width: 100% !important;
+    max-width: 640px !important;
+    margin: 0 auto !important;
+  }
+}
