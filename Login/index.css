@@ -418,7 +418,8 @@ body {
 
   .carrinho-container {
     width: 100% !important;
-    max-width: 640px !important;
+    max-width: 375px !important;
     margin: 0 auto !important;
   }
 }
+
