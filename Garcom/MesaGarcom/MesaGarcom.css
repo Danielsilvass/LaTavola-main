@@ -442,3 +442,122 @@ header {
   }
 }
 
+
+
+/* COPILOT MOBILE FIT FIX */
+html, body {
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+@media (max-width: 900px) {
+  body {
+    padding: 10px !important;
+  }
+
+  header,
+  main,
+  section,
+  article,
+  aside,
+  nav,
+  footer,
+  .container,
+  .content,
+  .wrapper,
+  .layout,
+  .row,
+  .grid,
+  .top-cards,
+  .middle-cards,
+  .kpi-grid,
+  .charts-grid,
+  .acoes-grid,
+  .form-grid,
+  .card,
+  .sugestao-card,
+  .section-box,
+  .list-item,
+  .table-container,
+  .sub-header-row,
+  .dashboard-grid,
+  .modal-content,
+  .usuario-info,
+  .painel,
+  .produtos-container,
+  .cardapio-container,
+  .tabela {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  header {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    text-align: center !important;
+    gap: 15px;
+  }
+
+  .sub-header-row,
+  .header-actions,
+  .stats-row,
+  .row,
+  .flex-row,
+  .dashboard-grid,
+  .kpi-grid,
+  .charts-grid,
+  .form-grid,
+  .acoes-grid,
+  .top-cards,
+  .middle-cards {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 15px !important;
+  }
+
+  .table-container {
+    overflow-x: auto !important;
+  }
+
+  table {
+    width: 100% !important;
+    display: block !important;
+  }
+
+  th,
+  td {
+    white-space: normal !important;
+    text-align: left !important;
+  }
+
+  .modal-content {
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 8px !important;
+  }
+
+  .modal-content {
+    padding: 20px !important;
+  }
+
+  .top-cards,
+  .middle-cards,
+  .kpi-grid,
+  .charts-grid,
+  .acoes-grid,
+  .form-grid,
+  .header-actions,
+  .stats-row {
+    gap: 12px !important;
+  }
+}

@@ -25,7 +25,7 @@ const pedidosRef = collection(db, "pedidos");
 const configRef = doc(db, "configuracoes", "geral");
 
 const listaCardapio = document.getElementById("listaCardapio");
-const botoesFiltro = document.querySelectorAll(".filtros button");
+const botoesFiltroContainer = document.getElementById("botoesFiltro");
 const carrinhoVazio = document.getElementById("carrinhoVazio");
 const carrinhoCheio = document.getElementById("carrinhoCheio");
 const itensDoCarrinho = document.getElementById("itensDoCarrinho");
@@ -35,6 +35,8 @@ const spanTaxa = document.getElementById("valorTaxa");
 const spanTotal = document.getElementById("valorTotal");
 const btnFazerPedido = document.getElementById("btnFazerPedido");
 const inputTelefone = document.getElementById("clienteTelefone");
+
+let categoriasCardapio = ["Pratos Principais", "Entradas", "Saladas", "Sobremesas", "Bebidas"];
 
 inputTelefone.addEventListener("input", function (e) {
   let valor = e.target.value.replace(/\D/g, "");
@@ -71,6 +73,13 @@ onSnapshot(configRef, (docSnap) => {
       configAceitaDelivery = cfg.aceitarDelivery;
     if (cfg.restauranteAberto !== undefined)
       configRestauranteAberto = cfg.restauranteAberto;
+
+    if (cfg.categorias && Array.isArray(cfg.categorias) && cfg.categorias.length > 0) {
+      categoriasCardapio = cfg.categorias;
+      renderizarFiltros(categoriasCardapio);
+    } else {
+      renderizarFiltros(categoriasCardapio);
+    }
 
     // Carregar formas de pagamento
     if (cfg.formasPagamento) {
@@ -123,7 +132,7 @@ function renderizarCardapio() {
   listaCardapio.innerHTML = "";
   const produtosFiltrados = todosOsProdutos.filter((prod) => {
     if (filtroAtual === "Todos") return true;
-    return prod.categoria.toLowerCase() === filtroAtual.toLowerCase();
+    return prod.categoria && prod.categoria.toLowerCase() === filtroAtual.toLowerCase();
   });
   if (produtosFiltrados.length === 0) {
     listaCardapio.innerHTML =
@@ -265,15 +274,27 @@ function atualizarInterfaceCarrinho() {
   spanTotal.innerText = totalFinal.toFixed(2);
 }
 
-// Filtro de Categorias (Lógica e Visual)
-botoesFiltro.forEach((btn) => {
-  btn.addEventListener("click", (e) => {
-    botoesFiltro.forEach((b) => b.classList.remove("ativo"));
-    e.target.classList.add("ativo");
-    filtroAtual = e.target.getAttribute("data-categoria");
-    renderizarCardapio();
+function renderizarFiltros(categorias) {
+  const categoriasUnicas = ["Todos", ...(Array.isArray(categorias) ? categorias : categoriasCardapio)];
+  const categoriasFinal = Array.from(new Set(categoriasUnicas));
+  botoesFiltroContainer.innerHTML = categoriasFinal
+    .map(
+      (cat, index) =>
+        `<button data-categoria="${cat}" class="${index === 0 ? "ativo" : ""}">${cat === "Todos" ? "Todos do Cardápio" : cat}</button>`
+    )
+    .join("");
+
+  botoesFiltroContainer.querySelectorAll("button").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      botoesFiltroContainer.querySelectorAll("button").forEach((b) => b.classList.remove("ativo"));
+      e.target.classList.add("ativo");
+      filtroAtual = e.target.getAttribute("data-categoria");
+      renderizarCardapio();
+    });
   });
-});
+}
+
+renderizarFiltros(categoriasCardapio);
 
 // 7. ENVIAR PEDIDO E APLICAR AS REGRAS DA GERENTE
 btnFazerPedido.addEventListener("click", async () => {
