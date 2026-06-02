@@ -36,7 +36,7 @@ if (elInfo) {
   btnLogout.onclick = () => {
     if (confirm("Tem certeza que deseja sair do sistema?")) {
       localStorage.clear();
-      window.location.href = "../../Login/Index.html";
+      window.location.href = "../../Login/index.html";
     }
   };
   elInfo.appendChild(document.createElement("br"));
@@ -390,3 +390,4 @@ function adicionarEventosBotoesAcao() {
     });
   });
 }
+

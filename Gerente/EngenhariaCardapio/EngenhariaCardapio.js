@@ -30,7 +30,7 @@ if (elInfoEC) {
   btnLogout.onclick = () => {
     if (confirm("Tem certeza que deseja sair do sistema?")) {
       localStorage.clear();
-      window.location.href = "../../Login/Index.html";
+      window.location.href = "../../Login/index.html";
     }
   };
   elInfoEC.appendChild(document.createElement('br'));
@@ -247,3 +247,4 @@ function processarTabela() {
   totQuebras.innerText = contadores.quebra;
   totCaes.innerText = contadores.cao;
 }
+

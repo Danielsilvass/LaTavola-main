@@ -31,7 +31,7 @@ if (elInfoMG) {
   btnLogout.onclick = () => {
     if (confirm("Tem certeza que deseja sair do sistema?")) {
       localStorage.clear();
-      window.location.href = "../../Login/Index.html";
+      window.location.href = "../../Login/index.html";
     }
   };
   elInfoMG.appendChild(document.createElement('br'));
@@ -201,3 +201,4 @@ btnFecharConta.addEventListener("click", async () => {
 btnAddItem.addEventListener("click", () => {
   window.location.href = `./CardapioGarcom/CardapioGarcom.html?mesa=${mesaId}`;
 });
+
