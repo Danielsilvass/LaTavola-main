@@ -56,6 +56,9 @@ let configTaxaEntrega = 8.0;
 let configMinimoDelivery = 0;
 let configAceitaDelivery = true;
 let configRestauranteAberto = true;
+let configFormasPagamento = {};
+
+const selectPagamento = document.getElementById("clientePagamento");
 
 onSnapshot(configRef, (docSnap) => {
   if (docSnap.exists()) {
@@ -68,9 +71,41 @@ onSnapshot(configRef, (docSnap) => {
       configAceitaDelivery = cfg.aceitarDelivery;
     if (cfg.restauranteAberto !== undefined)
       configRestauranteAberto = cfg.restauranteAberto;
+
+    // Carregar formas de pagamento
+    if (cfg.formasPagamento) {
+      configFormasPagamento = cfg.formasPagamento;
+      atualizarOpcoesPagamento();
+    }
+
     atualizarInterfaceCarrinho();
   }
 });
+
+function atualizarOpcoesPagamento() {
+  // Limpar opções exceto a primeira (placeholder)
+  while (selectPagamento.options.length > 1) {
+    selectPagamento.remove(1);
+  }
+
+  const mapa = {
+    dinheiro: "Dinheiro",
+    debito: "Cartão de Débito",
+    credito: "Cartão de Crédito",
+    pix: "PIX",
+    vr: "Vale Refeição",
+  };
+
+  // Adicionar opções conforme habilitadas no gerente
+  Object.entries(configFormasPagamento).forEach(([chave, habilitada]) => {
+    if (habilitada && mapa[chave]) {
+      const option = document.createElement("option");
+      option.value = mapa[chave];
+      option.text = mapa[chave];
+      selectPagamento.appendChild(option);
+    }
+  });
+}
 
 async function carregarProdutos() {
   const querySnapshot = await getDocs(produtosRef);
