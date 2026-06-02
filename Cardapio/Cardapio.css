@@ -33,6 +33,26 @@ header p {
     font-size: 1.1em;
 }
 
+.header-actions {
+    margin-top: 20px;
+}
+
+.btn-login-funcionarios {
+    display: inline-block;
+    background: #d4af37;
+    color: #121212;
+    padding: 12px 24px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.btn-login-funcionarios:hover {
+    background: #f0c45f;
+    transform: translateY(-1px);
+}
+
 /* Filtros */
 .filtros {
     width: 100%;
