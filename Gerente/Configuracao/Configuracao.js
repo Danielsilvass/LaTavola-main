@@ -123,10 +123,20 @@ function fecharModalDeCategoria() {
   inputNomeCategoria.value = "";
 }
 
+async function salvarCategoriasNoBanco() {
+  try {
+    await setDoc(configRef, { categorias: categoriasLocais }, { merge: true });
+  } catch (error) {
+    console.error("Erro ao salvar categorias no banco:", error);
+    alert("Erro ao salvar categorias. Tente novamente.");
+  }
+}
+
 function removerCategoria(index) {
   if (confirm(`Tem certeza que deseja excluir a categoria "${categoriasLocais[index]}"?`)) {
     categoriasLocais.splice(index, 1);
     renderizarCategorias();
+    salvarCategoriasNoBanco();
   }
 }
 
@@ -134,7 +144,7 @@ btnAdicionarCategoria.addEventListener("click", () => {
   abrirModalCategoria();
 });
 
-btnSalvarCategoria.addEventListener("click", () => {
+btnSalvarCategoria.addEventListener("click", async () => {
   const nomeCat = inputNomeCategoria.value.trim();
   if (!nomeCat) {
     alert("Informe o nome da categoria.");
@@ -160,6 +170,7 @@ btnSalvarCategoria.addEventListener("click", () => {
 
   renderizarCategorias();
   fecharModalDeCategoria();
+  await salvarCategoriasNoBanco();
 });
 
 fecharModalCategoria.addEventListener("click", fecharModalDeCategoria);

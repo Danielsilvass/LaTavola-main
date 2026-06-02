@@ -149,6 +149,21 @@ async function carregarCategorias() {
 }
 carregarCategorias();
 
+onSnapshot(configRef, (docSnap) => {
+  if (docSnap.exists() && docSnap.data().categorias) {
+    categoriasLocais = docSnap.data().categorias;
+    const preencherSelect = (selectEl) => {
+      selectEl.innerHTML = '<option value="">Selecione uma categoria...</option>';
+      categoriasLocais.forEach((cat) => {
+        selectEl.innerHTML += `<option value="${cat}">${cat}</option>`;
+      });
+    };
+
+    preencherSelect(document.getElementById("novaCategoria"));
+    preencherSelect(document.getElementById("editCategoria"));
+  }
+});
+
 // Redimensionar e Comprimir Imagem
 function processarImagem(arquivo) {
   return new Promise((resolve, reject) => {
