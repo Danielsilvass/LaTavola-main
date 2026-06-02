@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cozinha - La Tavola</title>
+    <link rel="stylesheet" href="Cozinha.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Cozinha - Pedidos em Tempo Real</h1>
+
+      <div class="usuario-info">
+        <strong id="headerNomeUsuario">Carregando...</strong><br />
+
+        <span id="headerPerfilUsuario"> ... </span>
+      </div>
+    </header>
+
+    <main class="board">
+      <section class="coluna" id="col-pendentes">
+        <h2>Pendentes (<span id="count-pendentes">0</span>)</h2>
+
+        <div class="lista-pedidos" id="listaPendentes"></div>
+      </section>
+
+      <section class="coluna" id="col-preparo">
+        <h2>Em Preparo (<span id="count-preparo">0</span>)</h2>
+
+        <div class="lista-pedidos" id="listaPreparo"></div>
+      </section>
+
+      <section class="coluna" id="col-prontos">
+        <h2>Prontos (<span id="count-prontos">0</span>)</h2>
+
+        <div class="lista-pedidos" id="listaProntos"></div>
+      </section>
+    </main>
+
+    <script type="module" src="./Cozinha.js"></script>
+  </body>
+</html>

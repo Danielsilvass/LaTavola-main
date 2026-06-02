@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalhes da Comanda - La Tavola</title>
+
+    <link rel="stylesheet" href="MesaGarcom.css" />
+  </head>
+  <body>
+    <header>
+      <h2 class="titulo-comanda">
+        Comanda <span id="tituloComanda">...</span>
+      </h2>
+
+      <div class="usuario-info">
+        <strong id="headerNomeUsuario">Carregando...</strong><br />
+
+        <span id="headerPerfilUsuario"> ... </span>
+      </div>
+    </header>
+
+    <a href="../Garcom.html" class="btn-voltar"> ← Voltar </a>
+
+    <div class="comanda-info">
+      <div class="info-top">
+        <div class="info-cliente">
+          <strong class="numero-comanda" id="txtNumeroCard"> #... </strong>
+
+          <div>
+            <strong class="nome-mesa" id="txtMesa"> Carregando... </strong
+            ><br />
+
+            <span class="nome-cliente" id="txtCliente"> ... </span>
+          </div>
+        </div>
+
+        <div class="info-total">
+          <strong class="valor-total" id="txtTotal"> R$ 0.00 </strong><br />
+
+          <span class="texto-total"> Total Parcial </span>
+        </div>
+      </div>
+
+      <div class="info-bottom">
+        <div>
+          👥 Pessoas:
+          <strong class="texto-branco" id="txtPessoas"> 0 </strong>
+        </div>
+
+        <div>
+          ⏱️ Status:
+          <strong class="texto-branco" id="txtStatus"> ... </strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="acoes-principais">
+      <button class="btn-add" id="btnAddItem">＋ Adicionar Item</button>
+
+      <button class="btn-fechar" id="btnFecharConta">＄ Fechar Conta</button>
+    </div>
+    <div class="abas">
+      <div class="aba ativa" id="abaTodos">Todos os Itens</div>
+
+      <div class="aba" id="abaCadeiras">Por Cadeira</div>
+    </div>
+    <div class="secao-itens">
+      <h3 class="titulo-secao">Itens do Pedido</h3>
+
+      <div id="listaItensComanda">
+        <p class="texto-vazio">Nenhum item adicionado ainda.</p>
+      </div>
+    </div>
+
+    <script type="module" src="./MesaGarcom.js"></script>
+  </body>
+</html>

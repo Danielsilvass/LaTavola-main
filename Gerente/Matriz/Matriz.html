@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Matriz Estratégica - La Tavola</title>
+    <link rel="stylesheet" href="Matriz.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <h1>La Tavola</h1>
+        <span>Sistema de Gestão</span>
+      </div>
+      <div class="usuario-info">
+        <strong id="headerNomeUsuario"> Carregando... </strong><br />
+        <span id="headerPerfilUsuario"> ... </span>
+      </div>
+    </header>
+    <h2 class="titulo-pagina">Matriz Estratégica</h2>
+    <button
+      class="btn-voltar"
+      onclick="window.location.href='../DashBoard.html'"
+    >
+      ← Voltar
+    </button>
+    <div class="section-box">
+      <h3>Matriz de Classificação de Produtos</h3>
+      <p>
+        Visualização gráfica da posição estratégica de cada produto. O eixo X
+        representa a popularidade (vendas relativas à média) e o eixo Y
+        representa a margem de lucro percentual.
+      </p>
+      <div class="chart-container">
+        <canvas id="matrizChart"></canvas>
+      </div>
+      <div class="axis-info">
+        <div>
+          <strong> 🧩 Quebra-Cabeça </strong>
+          <span> Alta Margem + Baixa Popularidade </span>
+        </div>
+        <div>
+          <strong> ⭐ Estrela </strong>
+          <span> Alta Margem + Alta Popularidade </span>
+        </div>
+      </div>
+      <div class="axis-info axis-bottom">
+        <div>
+          <strong> 🐶 Cão </strong>
+          <span> Baixa Margem + Baixa Popularidade </span>
+        </div>
+        <div>
+          <strong> 🐎 Cavalo de Batalha </strong>
+          <span> Baixa Margem + Alta Popularidade </span>
+        </div>
+      </div>
+    </div>
+    <div class="cards-grid">
+      <div class="legend-card">
+        <div class="icon-row">
+          <div class="dot dot-gold"></div>
+          ⭐
+        </div>
+        <h4>Estrela</h4>
+        <p>Mantenha em destaque. São seus melhores produtos.</p>
+      </div>
+      <div class="legend-card">
+        <div class="icon-row">
+          <div class="dot dot-red"></div>
+          🐎
+        </div>
+        <h4>Cavalo de Batalha</h4>
+        <p>Populares mas pouco lucrativos. Considere ajustar preço ou custo.</p>
+      </div>
+      <div class="legend-card">
+        <div class="icon-row">
+          <div class="dot dot-gold dot-opacity"></div>
+          🧩
+        </div>
+        <h4>Quebra-Cabeça</h4>
+        <p>Lucrativos mas pouco vendidos. Invista em marketing.</p>
+      </div>
+      <div class="legend-card">
+        <div class="icon-row">
+          <div class="dot dot-red dot-opacity"></div>
+
+          🐶
+        </div>
+        <h4>Cão</h4>
+        <p>Baixa performance. Considere remover do cardápio.</p>
+      </div>
+    </div>
+    <script type="module" src="./Matriz.js"></script>
+  </body>
+</html>

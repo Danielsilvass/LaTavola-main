@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Gerencial - La Tavola</title>
+    <link rel="stylesheet" href="DashBoard.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo-area">
+        <h1>La Tavola</h1>
+        <span>Sistema de Gestão</span>
+      </div>
+      <div class="usuario-info">
+        <strong id="headerNomeUsuario">Carregando...</strong><br />
+        <span id="headerPerfilUsuario">...</span>
+      </div>
+    </header>
+    <h2 class="titulo-dashboard">Gerente - Dashboard</h2>
+    <div class="top-cards">
+      <div class="card">
+        <div class="icon-top">＄</div>
+        <span>Faturamento</span>
+        <strong id="valFaturamento">R$ 0.00</strong>
+        <span class="subtext">Período atual</span>
+      </div>
+      <div class="card">
+        <div class="icon-top icon-red">↗</div>
+        <span>Vendas</span>
+        <strong class="text-white" id="valVendas">0</strong>
+        <span class="subtext">Comandas/Pedidos fechados</span>
+      </div>
+      <div class="card">
+        <div class="icon-top">👥</div>
+        <span>Ticket Médio</span>
+        <strong class="text-white" id="valTicket">R$ 0.00</strong>
+        <span class="subtext">Por venda</span>
+      </div>
+      <div class="card">
+        <div class="icon-top">📦</div>
+        <span>Produtos</span>
+        <strong class="text-white" id="valProdutos">0</strong>
+        <span class="subtext">Ativos no cardápio</span>
+      </div>
+    </div>
+    <div class="sugestao-card">
+      <div class="icone-estrela">☆</div>
+      <div class="sugestao-content">
+        <strong class="titulo-sugestao"> ⭐ Sugestão Estratégica Atual </strong>
+        <h3 id="sugestaoNome">Carregando...</h3>
+        <span class="info-sugestao" id="sugestaoInfo">
+          Categoria • R$ 0.00 • Margem Estimada: 75%
+        </span>
+        <p class="texto-sugestao">
+          💡 Produto estrela com excelente margem e popularidade. Mantenha em
+          destaque e incentive as vendas.
+        </p>
+      </div>
+    </div>
+    <div class="middle-cards">
+      <div class="middle-card">
+        <h3>↗ Produto Mais Vendido</h3>
+        <strong class="produto-titulo" id="topVendidoNome"> ... </strong>
+        <span class="produto-categoria" id="topVendidoCat"> ... </span>
+        <div class="stats-row">
+          <div class="stats-col">
+            <span>Total Vendido</span>
+            <strong class="text-gold" id="topVendidoQtd">0</strong>
+          </div>
+          <div class="stats-col">
+            <span>Receita</span>
+            <strong id="topVendidoReceita">R$ 0.00</strong>
+          </div>
+        </div>
+      </div>
+      <div class="middle-card">
+        <h3>＄ Produto Mais Lucrativo</h3>
+        <strong class="produto-titulo" id="topLucrativoNome"> ... </strong>
+        <span class="produto-categoria" id="topLucrativoCat"> ... </span>
+        <div class="stats-row">
+          <div class="stats-col">
+            <span>Lucro Total Estimado</span>
+            <strong class="text-gold" id="topLucrativoLucro"> R$ 0.00 </strong>
+          </div>
+          <div class="stats-col">
+            <span>Margem</span>
+            <strong>75%</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="acoes-container">
+      <h3>Ações Rápidas</h3>
+      <div class="acoes-grid">
+        <button
+          class="btn-acao destaque"
+          onclick="window.location.href='./EngenhariaCardapio/EngenhariaCardapio.html'"
+        >
+          ☆ Engenharia de Cardápio
+        </button>
+        <button
+          class="btn-acao alerta"
+          onclick="window.location.href='./Produto/Produto.html'"
+        >
+          📦 Produtos
+        </button>
+        <button
+          class="btn-acao"
+          onclick="window.location.href='./Relatorios/Relatorios.html'"
+        >
+          📊 Relatórios
+        </button>
+        <button
+          class="btn-acao"
+          onclick="window.location.href='./Matriz/Matriz.html'"
+        >
+          📈 Matriz Estratégica
+        </button>
+        <button
+          class="btn-acao"
+          onclick="window.location.href='./Usuarios/Usuarios.html'"
+        >
+          👥 Usuários
+        </button>
+        <button
+          class="btn-acao"
+          onclick="window.location.href='./Configuracao/Configuracao.html'"
+        >
+          ⚙️ Configurações
+        </button>
+      </div>
+    </div>
+    <script type="module" src="./DashBoard.js"></script>
+  </body>
+</html>

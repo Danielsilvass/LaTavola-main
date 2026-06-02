@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abrir Comanda - La Tavola</title>
+    <link rel="stylesheet" href="Comanda.css" />
+  </head>
+  <body>
+    <header>
+      <h2 class="titulo-header">Abrir Comanda</h2>
+      <div class="usuario-info">
+        <strong id="headerNomeUsuario">Carregando...</strong><br />
+        <span id="headerPerfilUsuario">...</span>
+      </div>
+    </header>
+    <div class="container-voltar">
+      <a href="../Recepcao.html" class="btn-voltar">← Voltar</a>
+    </div>
+    <div class="form-container">
+      <div class="form-header">
+        <div class="icon-comanda">🍽️</div>
+        <div>
+          <h3 class="titulo-formulario">Nova Comanda</h3>
+          <span class="descricao-formulario">
+            Preencha os dados para abrir uma nova comanda
+          </span>
+        </div>
+      </div>
+      <form id="formComanda">
+        <div class="form-group">
+          <label>Número de Pessoas</label>
+          <input
+            type="number"
+            id="qtdPessoas"
+            min="1"
+            max="10"
+            placeholder="Ex: 2"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label>Mesa</label>
+
+          <select id="selectMesa" required>
+            <option value="">
+              Selecione a quantidade de pessoas primeiro...
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Nome do Cliente (Opcional)</label>
+          <input type="text" id="nomeCliente" placeholder="Ex: João Silva" />
+        </div>
+        <div class="form-group">
+          <label>Garçom Responsável (Atribuído Automaticamente)</label>
+          <input
+            type="text"
+            id="nomeGarcom"
+            placeholder="Aguardando seleção da mesa..."
+            readonly
+            required
+          />
+        </div>
+        <div class="botoes">
+          <button
+            type="button"
+            class="btn-cancelar"
+            onclick="window.location.href='../Recepcao.html'"
+          >
+            Cancelar
+          </button>
+          <button type="submit" class="btn-abrir" id="btnSubmit">
+            Abrir Comanda
+          </button>
+        </div>
+      </form>
+    </div>
+    <script type="module" src="./Comanda.js"></script>
+  </body>
+</html>

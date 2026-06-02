@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recepção & Atendimento - La Tavola</title>
+    <link rel="stylesheet" href="Recepcao.css" />
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1 class="logo">La Tavola</h1>
+        <span class="subtitle">Sistema de Gestão</span>
+      </div>
+      <div class="user-info">
+        <strong id="headerNomeUsuario">Carregando...</strong><br />
+        <span id="headerPerfilUsuario">...</span>
+      </div>
+    </header>
+    <h2>Recepção & Atendimento - Dashboard</h2>
+    <div class="dashboard-cards">
+      <div class="card">
+        <div class="status-dot dot-green"></div>
+        <span>Mesas Livres</span>
+        <strong id="contadorMesasLivres">0</strong>
+      </div>
+      <div class="card">
+        <div class="status-dot dot-red"></div>
+        <span>Mesas Ocupadas</span>
+        <strong id="contadorMesasOcupadas">0</strong>
+      </div>
+      <div class="card card-gold">
+        <span>Pedidos Delivery</span>
+        <strong id="contadorPendentes">0</strong>
+        <span class="subtext">Aguardando aprovação</span>
+      </div>
+      <div class="card">
+        <span>Itens na Cozinha</span>
+        <strong id="contadorCozinha">0</strong>
+        <span class="subtext">Cozinha disponível</span>
+      </div>
+    </div>
+    <div class="action-buttons">
+      <button
+        class="btn-comanda"
+        onclick="window.location.href='./Comanda/Comanda.html'"
+      >
+        ⊕ Abrir Comanda
+      </button>
+
+      <button
+        class="btn-mesas"
+        onclick="window.location.href='./Mesas/Mesas.html'"
+      >
+        👥 Visualizar Mesas
+      </button>
+    </div>
+    <div class="section-box" id="containerPendentes" style="display: none">
+      <h3>
+        Pedidos Delivery Pendentes (<span id="qtdPendentesSecao">0</span>)
+      </h3>
+      <p class="section-description">
+        Aprove ou recuse os pedidos baseado na capacidade da cozinha
+      </p>
+      <div id="listaPendentes"></div>
+    </div>
+    <div class="section-box secondary">
+      <h3>Pedidos Delivery em Andamento (<span id="qtdAndamento">0</span>)</h3>
+      <div id="listaAndamento">
+        <p class="empty-text">Nenhum delivery em andamento.</p>
+      </div>
+    </div>
+    <div class="section-box secondary">
+      <h3>Comandas Presenciais Ativas (<span id="qtdComandas">0</span>)</h3>
+      <div id="listaComandasAtivas">
+        <p class="empty-text">Nenhuma comanda ativa.</p>
+      </div>
+    </div>
+    <script type="module" src="./Recepcao.js"></script>
+  </body>
+</html>

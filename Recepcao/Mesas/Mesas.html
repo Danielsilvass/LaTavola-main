@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Controle de Mesas - La Tavola</title>
+    <link rel="stylesheet" href="Mesas.css" />
+  </head>
+  <body>
+    <header>
+      <h2>Controle de Mesas</h2>
+      <div class="usuario-info">
+        <strong id="headerNomeUsuario">Carregando...</strong><br />
+        <span id="headerPerfilUsuario">...</span>
+      </div>
+    </header>
+    <a href="../Recepcao.html" class="btn-voltar">← Voltar</a>
+    <div class="legenda">
+      <div class="legenda-item">
+        <div class="box-color livre-color"></div>
+        Livre
+      </div>
+      <div class="legenda-item">
+        <div class="box-color ocupada-color"></div>
+        Ocupada
+      </div>
+      <div class="legenda-item">
+        <div class="box-color aguardando-color"></div>
+        Aguardando Pagamento
+      </div>
+    </div>
+    <div class="grid-mesas" id="gridMesas">
+      <p class="texto-carregando">Carregando layout das mesas...</p>
+    </div>
+    <script type="module" src="./Mesas.js"></script>
+  </body>
+</html>

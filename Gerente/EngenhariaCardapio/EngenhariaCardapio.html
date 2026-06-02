@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Engenharia de Cardápio - La Tavola</title>
+    <link rel="stylesheet" href="EngenhariaCardapio.css" />
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <h1>La Tavola</h1>
+        <span>Sistema de Gestão</span>
+      </div>
+      <div class="usuario-info">
+        <strong id="headerNomeUsuario"> Carregando... </strong><br />
+        <span id="headerPerfilUsuario"> ... </span>
+      </div>
+    </header>
+    <h2 class="titulo-pagina">Engenharia de Cardápio</h2>
+    <button
+      class="btn-voltar"
+      onclick="window.location.href='../DashBoard.html'"
+    >
+      ← Voltar
+    </button>
+    <div class="info-box">
+      <h3>↗ Análise Estratégica do Cardápio</h3>
+      <p>
+        Este módulo classifica cada produto do cardápio baseado em margem de
+        lucro e popularidade, oferecendo recomendações estratégicas para
+        maximizar a rentabilidade do restaurante.
+      </p>
+    </div>
+    <div class="resumo-grid">
+      <div class="card-resumo">
+        <div class="card-resumo-top">
+          <div class="icone">⭐</div>
+          <strong id="totEstrelas"> 0 </strong>
+        </div>
+        <div>
+          <h4>Estrela</h4>
+          <span> Alta margem + Popular </span>
+        </div>
+      </div>
+      <div class="card-resumo">
+        <div class="card-resumo-top">
+          <div class="icone">🐎</div>
+          <strong id="totCavalos"> 0 </strong>
+        </div>
+        <div>
+          <h4>Cavalo de Batalha</h4>
+          <span> Baixa margem + Popular </span>
+        </div>
+      </div>
+      <div class="card-resumo">
+        <div class="card-resumo-top">
+          <div class="icone">🧩</div>
+          <strong id="totQuebras"> 0 </strong>
+        </div>
+        <div>
+          <h4>Quebra-Cabeça</h4>
+          <span> Alta margem + Pouco popular </span>
+        </div>
+      </div>
+      <div class="card-resumo">
+        <div class="card-resumo-top">
+          <div class="icone">🐶</div>
+          <strong id="totCaes"> 0 </strong>
+        </div>
+        <div>
+          <h4>Cão</h4>
+          <span> Baixa margem + Pouco popular </span>
+        </div>
+      </div>
+    </div>
+    <div class="controls-row">
+      <div class="filtro-container">
+        <span class="icone-filtro"> ▽ </span>
+        <select id="filtroCategoria">
+          <option value="Todas">Todas as Categorias</option>
+          <option value="Pratos Principais">Pratos Principais</option>
+          <option value="Entradas">Entradas</option>
+          <option value="Saladas">Saladas</option>
+          <option value="Sobremesas">Sobremesas</option>
+          <option value="Bebidas">Bebidas</option>
+        </select>
+      </div>
+      <button
+        class="btn-matriz"
+        onclick="window.location.href='../Matriz/Matriz.html'"
+      >
+        📊 Ver Matriz Gráfica
+      </button>
+    </div>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Categoria</th>
+            <th>Preço</th>
+            <th>Custo</th>
+            <th>Margem</th>
+            <th>Vendas</th>
+            <th>Popularidade</th>
+            <th class="text-center">Classificação</th>
+            <th>Recomendação</th>
+          </tr>
+        </thead>
+        <tbody id="listaEngenharia">
+          <tr>
+            <td colspan="9" class="loading-cell">Carregando dados...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="criterios-box">
+      <h4>Critérios de Classificação</h4>
+      <div class="criterio-col">
+        <strong> Margem de Lucro: </strong>
+        • Alta: Acima de
+        <span id="txtMargemMedia"> ... </span>%<br />
+        • Baixa: Abaixo de
+        <span id="txtMargemMedia2"> ... </span>%
+      </div>
+      <div class="criterio-col">
+        <strong> Popularidade: </strong>
+        • Alta: Vendas acima da média (
+        <span id="txtMediaVendas"> ... </span>
+        unidades )<br />
+        • Baixa: Vendas abaixo da média
+      </div>
+    </div>
+    <script type="module" src="./EngenhariaCardapio.js"></script>
+  </body>
+</html>

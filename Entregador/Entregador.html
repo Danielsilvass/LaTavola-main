@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel do Entregador - La Tavola</title>
+    <link rel="stylesheet" href="Entregador.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo-area">
+        <h1>La Tavola</h1>
+        <span>Sistema de Gestão</span>
+      </div>
+
+      <div class="usuario-info">
+        <strong id="headerNomeUsuario">Carregando...</strong><br />
+
+        <span id="headerPerfilUsuario"> ... </span>
+      </div>
+    </header>
+    <div class="stats-container">
+      <div class="stat-box">
+        <span>Entregas Hoje</span>
+        <strong class="text-green" id="statEntregas">0</strong>
+      </div>
+
+      <div class="stat-box">
+        <span>Em Rota</span>
+        <strong class="text-yellow" id="statRota">0</strong>
+      </div>
+
+      <div class="stat-box">
+        <span>Ganhos Hoje</span>
+        <strong id="statGanhos">R$ 0.00</strong>
+      </div>
+
+      <div class="stat-box">
+        <span>Dist. Média</span>
+        <strong id="statDistancia">0.0 km</strong>
+      </div>
+    </div>
+
+    <div class="secao-pedidos escondido" id="secaoAndamento">
+      <h2>Minhas Entregas em Andamento</h2>
+
+      <div id="listaAndamento"></div>
+    </div>
+
+    <div class="secao-pedidos" id="secaoDisponiveis">
+      <h2>Pedidos Disponíveis (<span id="qtdDisponiveis">0</span>)</h2>
+
+      <div id="listaPedidos">
+        <p class="texto-loading">Procurando pedidos prontos para entrega...</p>
+      </div>
+    </div>
+
+    <!-- Resumo do dia -->
+    <div class="secao-pedidos escondido" id="secaoResumo">
+      <h2>Resumo do Dia</h2>
+
+      <div class="resumo-grid">
+        <div class="resumo-box">
+          <span>Total de Entregas</span>
+          <strong class="text-green" id="resumoEntregas">0</strong>
+        </div>
+
+        <div class="resumo-box">
+          <span>Total Ganho</span>
+          <strong class="text-gold" id="resumoGanhos">R$ 0.00</strong>
+        </div>
+
+        <div class="resumo-box">
+          <span>Distância Total</span>
+          <strong id="resumoDistancia">0.0 km</strong>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./Entregador.js"></script>
+  </body>
+</html>

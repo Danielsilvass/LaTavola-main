@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Itens - La Tavola</title>
+
+    <link rel="stylesheet" href="CardapioGarcom.css">
+</head>
+<body>
+
+    <header>
+
+        <h2 class="titulo-header" id="tituloHeader">
+            Mesa ... - Adicionar Itens
+        </h2>
+
+        <div class="usuario-info">
+
+            <strong id="headerNomeUsuario">
+                Carregando...
+            </strong><br>
+
+            <span id="headerPerfilUsuario">
+                ...
+            </span>
+
+        </div>
+
+    </header>
+
+    <a href="../MesaGarcom.html" class="btn-voltar" id="btnVoltar">
+        ← Voltar
+    </a>
+
+    <div class="layout">
+
+        <!-- Conteúdo principal -->
+        <div class="conteudo-principal">
+
+            <!-- Seleção de cadeiras -->
+            <div class="caixa-cadeiras">
+
+                <h3>
+
+                    <span>
+                        👤 Selecione a Cadeira
+                    </span>
+
+                    <span class="texto-cadeiras" id="txtPessoasMesa">
+                        ... pessoas na mesa
+                    </span>
+
+                </h3>
+
+                <div class="botoes-cadeira" id="containerCadeiras">
+
+                    <button class="btn-cadeira ativo" data-cadeira="Sem Cadeira">
+                        Sem Cadeira
+                    </button>
+
+                </div>
+
+                <p class="texto-ajuda">
+                    💡 Selecione a cadeira antes de adicionar os itens ao carrinho
+                </p>
+
+            </div>
+
+            <!-- Busca -->
+            <div class="busca-container">
+
+                <input
+                    type="text"
+                    id="inputBusca"
+                    placeholder="🔍 Buscar produto..."
+                >
+
+            </div>
+
+            <!-- Filtros -->
+            <div class="filtros" id="botoesFiltro">
+
+                <button class="ativo" data-categoria="Todos">
+                    Todos
+                </button>
+
+                <button data-categoria="Pratos Principais">
+                    Pratos Principais
+                </button>
+
+                <button data-categoria="Entradas">
+                    Entradas
+                </button>
+
+                <button data-categoria="Saladas">
+                    Saladas
+                </button>
+
+                <button data-categoria="Sobremesas">
+                    Sobremesas
+                </button>
+
+                <button data-categoria="Bebidas">
+                    Bebidas
+                </button>
+
+            </div>
+
+            <!-- Produtos -->
+            <div id="listaProdutos">
+
+                <p class="texto-loading">
+                    Carregando cardápio...
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+
+            <div class="carrinho-box">
+
+                <h3>
+                    Carrinho
+                </h3>
+
+                <div id="itensCarrinho">
+
+                    <p class="texto-vazio">
+                        Nenhum item selecionado
+                    </p>
+
+                </div>
+
+                <div class="carrinho-totais escondido" id="boxTotais">
+
+                    <div class="linha-info">
+
+                        <span>Itens</span>
+
+                        <strong id="qtdTotalItens">
+                            0
+                        </strong>
+
+                    </div>
+
+                    <div class="linha-total">
+
+                        <span>Total</span>
+
+                        <span id="valorTotalCarrinho">
+                            R$ 0.00
+                        </span>
+
+                    </div>
+
+                    <button
+                        class="btn-confirmar"
+                        id="btnConfirmarPedido"
+                    >
+                        Confirmar Pedido
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script type="module" src="./CardapioGarcom.js"></script>
+
+</body>
+</html>

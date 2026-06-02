@@ -1,0 +1,141 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  onSnapshot,
+  getDocs,
+  setDoc,
+  doc,
+} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+const nomeLogado = localStorage.getItem("usuarioLogado");
+const perfilLogado = localStorage.getItem("perfilLogado");
+
+const elNome = document.getElementById("headerNomeUsuario");
+const elPerfil = document.getElementById("headerPerfilUsuario");
+
+if (elNome && elPerfil) {
+  if (nomeLogado && perfilLogado) {
+    elNome.innerText = nomeLogado;
+    elPerfil.innerText = perfilLogado;
+  } else {
+    elNome.innerText = "Visitante";
+    elPerfil.innerText = "Sem Perfil";
+  }
+}
+
+// Injetar Botão de Logout
+const elInfoMes = document.querySelector('.usuario-info, .user-info');
+if (elInfoMes) {
+  const btnLogout = document.createElement('a');
+  btnLogout.innerText = "Sair ↩";
+  btnLogout.style = "color: #e74c3c; cursor: pointer; font-size: 0.85em; font-weight: bold; margin-top: 4px; display: inline-block; text-decoration: none;";
+  btnLogout.onclick = () => {
+    if (confirm("Tem certeza que deseja sair do sistema?")) {
+      localStorage.clear();
+      window.location.href = "../../Login/Index.html";
+    }
+  };
+  elInfoMes.appendChild(document.createElement('br'));
+  elInfoMes.appendChild(btnLogout);
+}
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBayur0I7uCelwae7NVXot19cYOD2fa0ro",
+  authDomain: "latavola-99df2.firebaseapp.com",
+  projectId: "latavola-99df2",
+  storageBucket: "latavola-99df2.firebasestorage.app",
+  messagingSenderId: "336225970527",
+  appId: "1:336225970527:web:5f60e799c507931143aeea",
+  measurementId: "G-XF8PMT0KGV",
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const mesasRef = collection(db, "mesas");
+
+const gridMesas = document.getElementById("gridMesas");
+
+async function inicializarMesasSeVazio() {
+  const snapshot = await getDocs(mesasRef);
+  if (snapshot.empty) {
+    console.log("Criando as 20 mesas no banco de dados...");
+    gridMesas.innerHTML =
+      "<p>Criando as mesas pela primeira vez, aguarde...</p>";
+
+    for (let i = 1; i <= 20; i++) {
+      let capacidade = 2;
+      if (i >= 8 && i <= 14) capacidade = 4;
+      if (i >= 15) capacidade = 6;
+
+      await setDoc(doc(db, "mesas", `mesa_${i}`), {
+        numero: i,
+        capacidade: capacidade,
+        status: "Livre",
+        pessoas: 0,
+        cliente: "",
+        garcom: "",
+        total: 0,
+      });
+    }
+  }
+  escutarMesasEmTempoReal();
+}
+
+function escutarMesasEmTempoReal() {
+  onSnapshot(mesasRef, (snapshot) => {
+    gridMesas.innerHTML = "";
+    const mesasArray = [];
+
+    snapshot.forEach((docSnap) => {
+      mesasArray.push(docSnap.data());
+    });
+
+    mesasArray.sort((a, b) => a.numero - b.numero);
+
+    mesasArray.forEach((mesa) => {
+      let classeCor = "livre";
+      let textoStatus = "Livre";
+      let htmlInfoExtra = "";
+
+      if (mesa.status === "Ocupada") {
+        classeCor = "ocupada";
+        textoStatus = "Ocupada";
+        htmlInfoExtra = `
+                    <div class="mesa-info">
+                        ${mesa.cliente}<br>
+                        <div class="mesa-total">R$ ${mesa.total.toFixed(
+                          2
+                        )}</div>
+                    </div>
+                `;
+      } else if (mesa.status === "Aguardando Pagamento") {
+        classeCor = "aguardando";
+        textoStatus = "Aguardando Pagamento";
+        htmlInfoExtra = `
+                    <div class="mesa-info">
+                        ${mesa.cliente}<br>
+                        <div class="mesa-total">R$ ${mesa.total.toFixed(
+                          2
+                        )}</div>
+                    </div>
+                `;
+      }
+      const textoPessoas =
+        mesa.status === "Livre"
+          ? `👥 ${mesa.capacidade} lugares`
+          : `👥 ${mesa.pessoas} pessoas`;
+
+      gridMesas.innerHTML += `
+                <div class="mesa-card ${classeCor}">
+                    <div class="mesa-numero">${mesa.numero}</div>
+                    <div class="mesa-status">${textoStatus}</div>
+                    <div class="mesa-capacidade">${textoPessoas}</div>
+                    ${htmlInfoExtra}
+                </div>
+            `;
+    });
+  });
+}
+
+inicializarMesasSeVazio();
