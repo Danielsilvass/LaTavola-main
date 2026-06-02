@@ -297,7 +297,8 @@ header p {
     color: #aaa;
 }
 
-.form-cliente input {
+.form-cliente input,
+.form-cliente select {
     background: #111;
     border: 1px solid #444;
     color: #fff;
@@ -307,7 +308,19 @@ header p {
     outline: none;
 }
 
-.form-cliente input:focus {
+.form-cliente select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, #d4af37 50%), linear-gradient(135deg, #d4af37 50%, transparent 50%);
+    background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px);
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.form-cliente input:focus,
+.form-cliente select:focus {
     border-color: #d4af37;
 }
 
@@ -395,4 +408,108 @@ header p {
         box-sizing: border-box;
         position: static;
     }
+}/* Mobile responsive base */
+@media (max-width: 900px) {
+  html, body {
+    min-width: 0;
+    padding: 10px;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  header,
+  main,
+  section,
+  aside,
+  .layout,
+  .carrinho-container,
+  .produtos-container,
+  .kpi-grid,
+  .charts-grid,
+  .table-container,
+  .form-cliente,
+  .modal-content,
+  .usuario-info,
+  .filtros,
+  .cardapio-container,
+  .painel,
+  .container,
+  .content {
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .layout {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .produtos-container {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .filtros {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    gap: 10px;
+    padding-bottom: 10px;
+  }
+
+  .filtros button,
+  .btn-login-funcionarios,
+  .btn-adicionar,
+  .btn-novo,
+  #btnFazerPedido,
+  button,
+  input,
+  select,
+  textarea {
+    width: 100% !important;
+    min-height: 44px;
+    font-size: 1rem;
+  }
+
+  table {
+    width: 100% !important;
+    display: block;
+    overflow-x: auto;
+  }
+
+  th,
+  td {
+    white-space: normal !important;
+    text-align: left !important;
+  }
+
+  .item-carrinho,
+  .produto-card,
+  .kpi-card,
+  .chart-box,
+  .tabela,
+  .card {
+    flex-direction: column;
+  }
+
+  .modal {
+    padding: 10px 0;
+  }
+
+  .modal-content {
+    max-height: calc(100vh - 20px);
+    overflow-y: auto;
+  }
+
+  .carrinho-container {
+    position: static;
+    top: auto;
+  }
 }

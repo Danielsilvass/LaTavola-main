@@ -65,6 +65,16 @@ const valMargemPerc = document.getElementById("valMargemPerc");
 const valTicket = document.getElementById("valTicket");
 const valQtdVendas = document.getElementById("valQtdVendas");
 const listaRelatorio = document.getElementById("listaRelatorio");
+const selectPeriodo = document.getElementById("selectPeriodo");
+
+let periodoSelecionado = selectPeriodo ? selectPeriodo.value : "Todos os períodos";
+
+if (selectPeriodo) {
+  selectPeriodo.addEventListener("change", () => {
+    periodoSelecionado = selectPeriodo.value;
+    gerarRelatorios();
+  });
+}
 
 onSnapshot(produtosRef, (snapshot) => {
   snapshot.forEach((doc) => {
@@ -115,6 +125,29 @@ function gerarRelatorios() {
   let qtdPedidosValidos = 0;
 
   listaDePedidos.forEach((pedido) => {
+    const dataPedido = pedido.data ? new Date(pedido.data) : null;
+
+    if (periodoSelecionado === "Este Mês") {
+      const hoje = new Date();
+      if (
+        !dataPedido ||
+        dataPedido.getMonth() !== hoje.getMonth() ||
+        dataPedido.getFullYear() !== hoje.getFullYear()
+      ) {
+        return;
+      }
+    } else if (periodoSelecionado === "Mês Passado") {
+      const hoje = new Date();
+      const mesPassado = new Date(hoje.getFullYear(), hoje.getMonth() - 1, 1);
+      if (
+        !dataPedido ||
+        dataPedido.getMonth() !== mesPassado.getMonth() ||
+        dataPedido.getFullYear() !== mesPassado.getFullYear()
+      ) {
+        return;
+      }
+    }
+
     const isDelivery = !!pedido.cliente;
     const isMesa = !!pedido.mesaId;
 

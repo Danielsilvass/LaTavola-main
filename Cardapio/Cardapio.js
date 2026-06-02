@@ -276,9 +276,15 @@ btnFazerPedido.addEventListener("click", async () => {
   const telefone = document.getElementById("clienteTelefone").value;
   const endereco = document.getElementById("clienteEndereco").value;
   const bairro = document.getElementById("clienteBairro").value;
+  const pagamento = document.getElementById("clientePagamento").value;
 
   if (!nome || !telefone || !endereco) {
     alert("Por favor, preencha os dados de entrega completos!");
+    return;
+  }
+
+  if (!pagamento) {
+    alert("Por favor, selecione a forma de pagamento.");
     return;
   }
 
@@ -292,7 +298,12 @@ btnFazerPedido.addEventListener("click", async () => {
     status: "Aguardando Aprovação", // Cai na tela da Recepção
     cliente: { nome, telefone, endereco, bairro },
     itens: carrinho,
-    resumo: { subtotal, taxaEntrega: configTaxaEntrega, total },
+    resumo: {
+      subtotal,
+      taxaEntrega: configTaxaEntrega,
+      total,
+      formaPagamento: pagamento,
+    },
   };
 
   try {
