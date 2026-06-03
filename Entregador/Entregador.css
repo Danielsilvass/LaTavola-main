@@ -215,6 +215,7 @@ header {
 /* Texto auxiliar */
 .texto-loading {
     color: #aaa;
+}
 /* Mobile responsive base */
 @media (max-width: 900px) {
   html, body {

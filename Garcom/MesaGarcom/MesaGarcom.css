@@ -239,6 +239,7 @@ header {
 /* Texto auxiliar */
 .texto-vazio {
     color: #aaa;
+}
 /* Mobile responsive base */
 @media (max-width: 900px) {
   html, body {

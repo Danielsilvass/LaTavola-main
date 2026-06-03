@@ -354,6 +354,7 @@ header {
     color: white;
 
     border-color: #e74c3c;
+}
 /* Mobile responsive base */
 @media (max-width: 900px) {
   html, body {

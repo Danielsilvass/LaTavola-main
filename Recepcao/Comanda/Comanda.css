@@ -187,6 +187,7 @@ input[readonly] {
 
 .btn-abrir {
     background: #5a1a1a;
+}
 /* Mobile responsive base */
 @media (max-width: 900px) {
   html, body {

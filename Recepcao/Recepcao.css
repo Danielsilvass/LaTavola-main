@@ -257,6 +257,7 @@ header {
   padding: 4px 8px;
   border-radius: 12px;
   font-size: 0.7em;
+}
 /* Mobile responsive base */
 @media (max-width: 900px) {
   html, body {

@@ -409,6 +409,7 @@ td {
     width: 16px;
     height: 16px;
     accent-color: #d4af37;
+}
 /* Mobile responsive base */
 @media (max-width: 900px) {
   html, body {

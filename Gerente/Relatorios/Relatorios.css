@@ -209,12 +209,16 @@ h2 {
 
 .chart-container {
     flex: 1;
-
     position: relative;
-
     width: 100%;
+    min-height: 260px;
+    max-height: 420px;
 }
 
+.chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
 
 .table-container {
     background: #1a1a1a;
@@ -302,6 +306,7 @@ tr:hover {
 
 .td-margem {
     color: #d4af37;
+}
 /* Mobile responsive base */
 @media (max-width: 900px) {
   html, body {

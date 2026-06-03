@@ -130,6 +130,7 @@ header h1 {
 .btn-despachar {
     background: #9b59b6;
     color: white;
+}
 /* Mobile responsive base */
 @media (max-width: 900px) {
   html, body {

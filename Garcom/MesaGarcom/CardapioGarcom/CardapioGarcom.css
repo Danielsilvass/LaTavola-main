@@ -312,6 +312,7 @@ header {
     text-align: center;
 
     margin: 30px 0;
+}
 /* Mobile responsive base */
 @media (max-width: 900px) {
   html, body {

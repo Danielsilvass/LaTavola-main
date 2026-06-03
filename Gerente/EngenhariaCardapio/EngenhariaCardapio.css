@@ -344,6 +344,7 @@ tr:hover {
     text-align: center;
     color: #777;
     padding: 30px;
+}
 /* Mobile responsive base */
 @media (max-width: 900px) {
   html, body {

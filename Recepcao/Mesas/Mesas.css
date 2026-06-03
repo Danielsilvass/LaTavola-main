@@ -159,6 +159,7 @@ header {
 .usuario-info span {
     color: #aaa;
     font-size: 0.8em;
+}
 /* Mobile responsive base */
 @media (max-width: 900px) {
   html, body {

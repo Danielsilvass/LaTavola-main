@@ -158,6 +158,7 @@ header {
 /* Texto vazio */
 .texto-vazio {
     color: #777;
+}
 /* Mobile responsive base */
 @media (max-width: 900px) {
   html, body {
