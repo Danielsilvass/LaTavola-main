@@ -33,7 +33,7 @@ if (elInfoCG) {
   btnLogout.onclick = () => {
     if (confirm("Tem certeza que deseja sair do sistema?")) {
       localStorage.clear();
-      window.location.href = "../../../Login/index.html";
+      window.location.href = "../../../Login/Index.html";
     }
   };
   elInfoCG.appendChild(document.createElement('br'));
@@ -58,7 +58,7 @@ const mesaId = params.get("mesa");
 
 if (!mesaId) {
   alert("Nenhuma mesa selecionada!");
-  window.location.href = "../../Garcom.html";
+  window.location.href = "../Garcom.html";
 }
 
 document.getElementById("btnVoltar").href = `../MesaGarcom.html?mesa=${mesaId}`;
@@ -333,4 +333,3 @@ btnConfirmarPedido.addEventListener("click", async () => {
 });
 
 inicializar();
-

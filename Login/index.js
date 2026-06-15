@@ -20,34 +20,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const contasDemo = {
-  "gerente@restaurante.com": {
-    nome: "Ana Gerente (Padrão)",
-    perfil: "Gerente",
-    redirect: "../Gerente/DashBoard.html",
-  },
-  "recepcao@restaurante.com": {
-    nome: "Recepção",
-    perfil: "Recepção",
-    redirect: "../Recepcao/Recepcao.html",
-  },
-  "garcom@restaurante.com": {
-    nome: "Garçom",
-    perfil: "Garçom",
-    redirect: "../Garcom/Garcom.html",
-  },
-  "cozinha@restaurante.com": {
-    nome: "Cozinha",
-    perfil: "Cozinha",
-    redirect: "../Cozinha/Cozinha.html",
-  },
-  "entrega@restaurante.com": {
-    nome: "Entregador",
-    perfil: "Entregador",
-    redirect: "../Entregador/Entregador.html",
-  },
-};
-
 document
   .getElementById("formLogin")
   .addEventListener("submit", async function (event) {
@@ -63,11 +35,13 @@ document
     btn.innerText = "Verificando...";
     btn.disabled = true;
 
-    const contaDemo = contasDemo[emailDigitado];
-    if (contaDemo && senhaDigitada === "123456") {
-      localStorage.setItem("usuarioLogado", contaDemo.nome);
-      localStorage.setItem("perfilLogado", contaDemo.perfil);
-      window.location.href = contaDemo.redirect;
+    if (
+      emailDigitado === "gerente@restaurante.com" &&
+      senhaDigitada === "123456"
+    ) {
+      localStorage.setItem("usuarioLogado", "Ana Gerente (Padrão)");
+      localStorage.setItem("perfilLogado", "Gerente");
+      window.location.href = "../Gerente/DashBoard.html";
       return;
     }
 

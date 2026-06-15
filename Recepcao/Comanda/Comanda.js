@@ -32,7 +32,7 @@ if (elInfoCom) {
   btnLogout.onclick = () => {
     if (confirm("Tem certeza que deseja sair do sistema?")) {
       localStorage.clear();
-      window.location.href = "../../Login/index.html";
+      window.location.href = "../../Login/Index.html";
     }
   };
   elInfoCom.appendChild(document.createElement('br'));
@@ -139,4 +139,3 @@ formComanda.addEventListener("submit", async (e) => {
 });
 
 carregarMesasLivres();
-

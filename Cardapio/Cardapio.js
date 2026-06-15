@@ -25,7 +25,7 @@ const pedidosRef = collection(db, "pedidos");
 const configRef = doc(db, "configuracoes", "geral");
 
 const listaCardapio = document.getElementById("listaCardapio");
-const botoesFiltroContainer = document.getElementById("botoesFiltro");
+const botoesFiltro = document.querySelectorAll(".filtros button");
 const carrinhoVazio = document.getElementById("carrinhoVazio");
 const carrinhoCheio = document.getElementById("carrinhoCheio");
 const itensDoCarrinho = document.getElementById("itensDoCarrinho");
@@ -35,8 +35,6 @@ const spanTaxa = document.getElementById("valorTaxa");
 const spanTotal = document.getElementById("valorTotal");
 const btnFazerPedido = document.getElementById("btnFazerPedido");
 const inputTelefone = document.getElementById("clienteTelefone");
-
-let categoriasCardapio = ["Pratos Principais", "Entradas", "Saladas", "Sobremesas", "Bebidas"];
 
 inputTelefone.addEventListener("input", function (e) {
   let valor = e.target.value.replace(/\D/g, "");
@@ -58,9 +56,6 @@ let configTaxaEntrega = 8.0;
 let configMinimoDelivery = 0;
 let configAceitaDelivery = true;
 let configRestauranteAberto = true;
-let configFormasPagamento = {};
-
-const selectPagamento = document.getElementById("clientePagamento");
 
 onSnapshot(configRef, (docSnap) => {
   if (docSnap.exists()) {
@@ -73,48 +68,9 @@ onSnapshot(configRef, (docSnap) => {
       configAceitaDelivery = cfg.aceitarDelivery;
     if (cfg.restauranteAberto !== undefined)
       configRestauranteAberto = cfg.restauranteAberto;
-
-    if (cfg.categorias && Array.isArray(cfg.categorias) && cfg.categorias.length > 0) {
-      categoriasCardapio = cfg.categorias;
-      renderizarFiltros(categoriasCardapio);
-    } else {
-      renderizarFiltros(categoriasCardapio);
-    }
-
-    // Carregar formas de pagamento
-    if (cfg.formasPagamento) {
-      configFormasPagamento = cfg.formasPagamento;
-      atualizarOpcoesPagamento();
-    }
-
     atualizarInterfaceCarrinho();
   }
 });
-
-function atualizarOpcoesPagamento() {
-  // Limpar opções exceto a primeira (placeholder)
-  while (selectPagamento.options.length > 1) {
-    selectPagamento.remove(1);
-  }
-
-  const mapa = {
-    dinheiro: "Dinheiro",
-    debito: "Cartão de Débito",
-    credito: "Cartão de Crédito",
-    pix: "PIX",
-    vr: "Vale Refeição",
-  };
-
-  // Adicionar opções conforme habilitadas no gerente
-  Object.entries(configFormasPagamento).forEach(([chave, habilitada]) => {
-    if (habilitada && mapa[chave]) {
-      const option = document.createElement("option");
-      option.value = mapa[chave];
-      option.text = mapa[chave];
-      selectPagamento.appendChild(option);
-    }
-  });
-}
 
 async function carregarProdutos() {
   const querySnapshot = await getDocs(produtosRef);
@@ -132,7 +88,7 @@ function renderizarCardapio() {
   listaCardapio.innerHTML = "";
   const produtosFiltrados = todosOsProdutos.filter((prod) => {
     if (filtroAtual === "Todos") return true;
-    return prod.categoria && prod.categoria.toLowerCase() === filtroAtual.toLowerCase();
+    return prod.categoria.toLowerCase() === filtroAtual.toLowerCase();
   });
   if (produtosFiltrados.length === 0) {
     listaCardapio.innerHTML =
@@ -274,27 +230,15 @@ function atualizarInterfaceCarrinho() {
   spanTotal.innerText = totalFinal.toFixed(2);
 }
 
-function renderizarFiltros(categorias) {
-  const categoriasUnicas = ["Todos", ...(Array.isArray(categorias) ? categorias : categoriasCardapio)];
-  const categoriasFinal = Array.from(new Set(categoriasUnicas));
-  botoesFiltroContainer.innerHTML = categoriasFinal
-    .map(
-      (cat, index) =>
-        `<button data-categoria="${cat}" class="${index === 0 ? "ativo" : ""}">${cat === "Todos" ? "Todos do Cardápio" : cat}</button>`
-    )
-    .join("");
-
-  botoesFiltroContainer.querySelectorAll("button").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      botoesFiltroContainer.querySelectorAll("button").forEach((b) => b.classList.remove("ativo"));
-      e.target.classList.add("ativo");
-      filtroAtual = e.target.getAttribute("data-categoria");
-      renderizarCardapio();
-    });
+// Filtro de Categorias (Lógica e Visual)
+botoesFiltro.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    botoesFiltro.forEach((b) => b.classList.remove("ativo"));
+    e.target.classList.add("ativo");
+    filtroAtual = e.target.getAttribute("data-categoria");
+    renderizarCardapio();
   });
-}
-
-renderizarFiltros(categoriasCardapio);
+});
 
 // 7. ENVIAR PEDIDO E APLICAR AS REGRAS DA GERENTE
 btnFazerPedido.addEventListener("click", async () => {
@@ -332,15 +276,9 @@ btnFazerPedido.addEventListener("click", async () => {
   const telefone = document.getElementById("clienteTelefone").value;
   const endereco = document.getElementById("clienteEndereco").value;
   const bairro = document.getElementById("clienteBairro").value;
-  const pagamento = document.getElementById("clientePagamento").value;
 
   if (!nome || !telefone || !endereco) {
     alert("Por favor, preencha os dados de entrega completos!");
-    return;
-  }
-
-  if (!pagamento) {
-    alert("Por favor, selecione a forma de pagamento.");
     return;
   }
 
@@ -354,12 +292,7 @@ btnFazerPedido.addEventListener("click", async () => {
     status: "Aguardando Aprovação", // Cai na tela da Recepção
     cliente: { nome, telefone, endereco, bairro },
     itens: carrinho,
-    resumo: {
-      subtotal,
-      taxaEntrega: configTaxaEntrega,
-      total,
-      formaPagamento: pagamento,
-    },
+    resumo: { subtotal, taxaEntrega: configTaxaEntrega, total },
   };
 
   try {

@@ -24,22 +24,6 @@ if (elNome && elPerfil) {
     elPerfil.innerText = "Sem Perfil";
   }
 }
-
-const elInfo = document.querySelector(".usuario-info, .user-info");
-if (elInfo) {
-  const btnLogout = document.createElement("a");
-  btnLogout.innerText = "Sair";
-  btnLogout.style =
-    "color: #e74c3c; cursor: pointer; font-size: 0.85em; font-weight: bold; margin-top: 4px; display: inline-block; text-decoration: none;";
-  btnLogout.onclick = () => {
-    if (confirm("Tem certeza que deseja sair do sistema?")) {
-      localStorage.clear();
-      window.location.href = "../../Login/index.html";
-    }
-  };
-  elInfo.appendChild(document.createElement("br"));
-  elInfo.appendChild(btnLogout);
-}
 const firebaseConfig = {
   apiKey: "AIzaSyBayur0I7uCelwae7NVXot19cYOD2fa0ro",
   authDomain: "latavola-99df2.firebaseapp.com",
@@ -410,4 +394,3 @@ async function redividirTodasMesas() {
   }
   console.log("Mesas redistribuídas com sucesso!");
 }
-

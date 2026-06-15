@@ -22,22 +22,6 @@ if (elNome && elPerfil) {
   }
 }
 
-const elInfo = document.querySelector(".usuario-info, .user-info");
-if (elInfo) {
-  const btnLogout = document.createElement("a");
-  btnLogout.innerText = "Sair";
-  btnLogout.style =
-    "color: #e74c3c; cursor: pointer; font-size: 0.85em; font-weight: bold; margin-top: 4px; display: inline-block; text-decoration: none;";
-  btnLogout.onclick = () => {
-    if (confirm("Tem certeza que deseja sair do sistema?")) {
-      localStorage.clear();
-      window.location.href = "../../Login/index.html";
-    }
-  };
-  elInfo.appendChild(document.createElement("br"));
-  elInfo.appendChild(btnLogout);
-}
-
 const firebaseConfig = {
   apiKey: "AIzaSyBayur0I7uCelwae7NVXot19cYOD2fa0ro",
   authDomain: "latavola-99df2.firebaseapp.com",
@@ -64,12 +48,6 @@ const btnSalvarConfig = document.getElementById("btnSalvarConfig");
 
 const containerCategorias = document.getElementById("containerCategorias");
 const btnAdicionarCategoria = document.getElementById("btnAdicionarCategoria");
-const modalCategoria = document.getElementById("modalCategoria");
-const fecharModalCategoria = document.getElementById("fecharModalCategoria");
-const btnCancelarCategoria = document.getElementById("btnCancelarCategoria");
-const btnSalvarCategoria = document.getElementById("btnSalvarCategoria");
-const tituloModalCategoria = document.getElementById("tituloModalCategoria");
-const inputNomeCategoria = document.getElementById("inputNomeCategoria");
 
 const chkPagDinheiro = document.getElementById("chkPagDinheiro");
 const chkPagDebito = document.getElementById("chkPagDebito");
@@ -78,7 +56,6 @@ const chkPagPix = document.getElementById("chkPagPix");
 const chkPagVR = document.getElementById("chkPagVR");
 
 let categoriasLocais = ["Entradas", "Pratos Principais", "Saladas", "Sobremesas", "Bebidas"];
-let categoriaEditandoIndex = null;
 
 function renderizarCategorias() {
   containerCategorias.innerHTML = "";
@@ -88,96 +65,39 @@ function renderizarCategorias() {
     div.innerHTML = `
       <strong>${cat}</strong>
       <div>
-        <button type="button" class="btn-editar-mock btn-editar-categoria" style="margin-right: 5px;" data-index="${index}">Editar</button>
-        <button type="button" class="btn-editar-mock btn-remover-categoria" style="background: #e74c3c;" data-index="${index}">Excluir</button>
+        <button type="button" class="btn-editar-mock" style="margin-right: 5px;" onclick="editarCategoriaGlobal(${index})">Editar</button>
+        <button type="button" class="btn-editar-mock" style="background: #e74c3c;" onclick="removerCategoriaGlobal(${index})">Excluir</button>
       </div>
     `;
     containerCategorias.appendChild(div);
   });
-
-  document.querySelectorAll(".btn-editar-categoria").forEach((btn) => {
-    btn.addEventListener("click", (event) => {
-      abrirModalCategoria(Number(event.currentTarget.dataset.index));
-    });
-  });
-
-  document.querySelectorAll(".btn-remover-categoria").forEach((btn) => {
-    btn.addEventListener("click", (event) => {
-      removerCategoria(Number(event.currentTarget.dataset.index));
-    });
-  });
 }
 
-function abrirModalCategoria(index = null) {
-  categoriaEditandoIndex = index;
-  const editando = index !== null;
-  tituloModalCategoria.innerText = editando ? "Editar Categoria" : "Nova Categoria";
-  inputNomeCategoria.value = editando ? categoriasLocais[index] : "";
-  modalCategoria.style.display = "block";
-  inputNomeCategoria.focus();
-}
-
-function fecharModalDeCategoria() {
-  modalCategoria.style.display = "none";
-  categoriaEditandoIndex = null;
-  inputNomeCategoria.value = "";
-}
-
-async function salvarCategoriasNoBanco() {
-  try {
-    await setDoc(configRef, { categorias: categoriasLocais }, { merge: true });
-  } catch (error) {
-    console.error("Erro ao salvar categorias no banco:", error);
-    alert("Erro ao salvar categorias. Tente novamente.");
+window.editarCategoriaGlobal = (index) => {
+  const antigoNome = categoriasLocais[index];
+  const novoNome = prompt("Editar nome da categoria:", antigoNome);
+  if (novoNome && novoNome.trim() !== "") {
+    categoriasLocais[index] = novoNome.trim();
+    renderizarCategorias();
   }
-}
+};
 
-function removerCategoria(index) {
+window.removerCategoriaGlobal = (index) => {
   if (confirm(`Tem certeza que deseja excluir a categoria "${categoriasLocais[index]}"?`)) {
     categoriasLocais.splice(index, 1);
     renderizarCategorias();
-    salvarCategoriasNoBanco();
   }
-}
+};
 
 btnAdicionarCategoria.addEventListener("click", () => {
-  abrirModalCategoria();
-});
-
-btnSalvarCategoria.addEventListener("click", async () => {
-  const nomeCat = inputNomeCategoria.value.trim();
-  if (!nomeCat) {
-    alert("Informe o nome da categoria.");
-    return;
-  }
-
-  const existe = categoriasLocais.some(
-    (cat, index) =>
-      cat.toLowerCase() === nomeCat.toLowerCase() &&
-      index !== categoriaEditandoIndex
-  );
-
-  if (existe) {
-    alert("Esta categoria ja existe!");
-    return;
-  }
-
-  if (categoriaEditandoIndex !== null) {
-    categoriasLocais[categoriaEditandoIndex] = nomeCat;
-  } else {
-    categoriasLocais.push(nomeCat);
-  }
-
-  renderizarCategorias();
-  fecharModalDeCategoria();
-  await salvarCategoriasNoBanco();
-});
-
-fecharModalCategoria.addEventListener("click", fecharModalDeCategoria);
-btnCancelarCategoria.addEventListener("click", fecharModalDeCategoria);
-modalCategoria.addEventListener("click", (event) => {
-  if (event.target === modalCategoria) {
-    fecharModalDeCategoria();
+  const nomeCat = prompt("Digite o nome da nova categoria:");
+  if (nomeCat && nomeCat.trim() !== "") {
+    if (categoriasLocais.includes(nomeCat.trim())) {
+      alert("Esta categoria já existe!");
+      return;
+    }
+    categoriasLocais.push(nomeCat.trim());
+    renderizarCategorias();
   }
 });
 
@@ -268,4 +188,3 @@ btnSalvarConfig.addEventListener("click", async () => {
 });
 
 carregarConfiguracoes();
-

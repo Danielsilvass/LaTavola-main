@@ -6,6 +6,7 @@ import {
   doc,
   getDoc,
   updateDoc,
+  deleteDoc,
   onSnapshot,
 } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
@@ -26,21 +27,6 @@ if (elNome && elPerfil) {
         elNome.innerText = "Visitante";
         elPerfil.innerText = "Sem Perfil";
     }
-}
-const elInfo = document.querySelector(".usuario-info, .user-info");
-if (elInfo) {
-  const btnLogout = document.createElement("a");
-  btnLogout.innerText = "Sair";
-  btnLogout.style =
-    "color: #e74c3c; cursor: pointer; font-size: 0.85em; font-weight: bold; margin-top: 4px; display: inline-block; text-decoration: none;";
-  btnLogout.onclick = () => {
-    if (confirm("Tem certeza que deseja sair do sistema?")) {
-      localStorage.clear();
-      window.location.href = "../../Login/index.html";
-    }
-  };
-  elInfo.appendChild(document.createElement("br"));
-  elInfo.appendChild(btnLogout);
 }
 // ==========================================
 
@@ -71,10 +57,6 @@ const formNovo = document.getElementById("formNovo");
 const formEditar = document.getElementById("formEditar");
 
 document.getElementById("btnNovoProduto").onclick = () => {
-  formNovo.reset();
-  novoImagemBase64 = "";
-  previewNovoImg.src = "";
-  previewNovoContainer.style.display = "none";
   modalNovo.style.display = "block";
 };
 document.getElementById("btnCancelarNovo").onclick = () => {
@@ -148,21 +130,6 @@ async function carregarCategorias() {
   preencherSelect(document.getElementById("editCategoria"));
 }
 carregarCategorias();
-
-onSnapshot(configRef, (docSnap) => {
-  if (docSnap.exists() && docSnap.data().categorias) {
-    categoriasLocais = docSnap.data().categorias;
-    const preencherSelect = (selectEl) => {
-      selectEl.innerHTML = '<option value="">Selecione uma categoria...</option>';
-      categoriasLocais.forEach((cat) => {
-        selectEl.innerHTML += `<option value="${cat}">${cat}</option>`;
-      });
-    };
-
-    preencherSelect(document.getElementById("novaCategoria"));
-    preencherSelect(document.getElementById("editCategoria"));
-  }
-});
 
 // Redimensionar e Comprimir Imagem
 function processarImagem(arquivo) {
@@ -284,9 +251,7 @@ function renderizarTabela() {
                     <button class="icon-btn btn-editar" title="Editar Produto" data-id="${
                       produto.id
                     }">📝</button>
-                    <button class="icon-btn btn-toggle-status" title="${
-                      produto.ativo ? "Desativar Produto" : "Reativar Produto"
-                    }" data-id="${
+                    <button class="icon-btn btn-excluir" title="Desativar/Excluir" data-id="${
                       produto.id
                     }">⏻</button>
                 </div>
@@ -390,19 +355,12 @@ function adicionarEventosBotoesAcao() {
     });
   });
 
-  document.querySelectorAll(".btn-toggle-status").forEach((btn) => {
+  document.querySelectorAll(".btn-excluir").forEach((btn) => {
     btn.addEventListener("click", async (e) => {
       const id = e.target.closest("button").getAttribute("data-id");
-      const produto = produtosTemp.find((p) => p.id === id);
-      if (!produto) return;
-
-      const novoStatus = !produto.ativo;
-      const acao = novoStatus ? "reativar" : "desativar";
-
-      if (confirm(`Tem certeza que deseja ${acao} este produto?`)) {
-        await updateDoc(doc(db, "produtos", id), { ativo: novoStatus });
+      if (confirm("Tem certeza que deseja excluir este produto do sistema?")) {
+        await deleteDoc(doc(db, "produtos", id));
       }
     });
   });
 }
-
