@@ -292,3 +292,52 @@ header {
 
     border-color: #e74c3c;
 }
+
+/* Responsividade (Mobile) */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .usuario-info {
+        text-align: left;
+    }
+
+    .top-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .sugestao-card {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        gap: 15px;
+    }
+
+    .icone-estrela {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2em;
+    }
+
+    .middle-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .acoes-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .btn-acao {
+        text-align: center;
+        padding: 12px;
+    }
+}
