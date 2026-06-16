@@ -169,7 +169,7 @@ header {
         gap: 10px;
     }
 
-    .mesas-grid {
+    .grid-mesas {
         grid-template-columns: 1fr;
     }
 }
