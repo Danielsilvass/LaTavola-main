@@ -1,167 +1,143 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Configurações do Sistema - La Tavola</title>
-    <link rel="stylesheet" href="Configuracao.css" />
-  </head>
-  <body>
-    <header>
-      <div class="brand">
-        <h1>La Tavola</h1>
-        <span>Sistema de Gestão</span>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configurações do Sistema - La Tavola</title>
+  <link rel="stylesheet" href="Configuracao.css" />
+</head>
+
+<body>
+  <header>
+    <div class="brand">
+      <h1>La Tavola</h1>
+      <span>Sistema de Gestão</span>
+    </div>
+    <div class="usuario-info">
+      <strong id="headerNomeUsuario"> Carregando... </strong><br /><span id="headerPerfilUsuario">
+        ...
+      </span>
+    </div>
+  </header>
+  <h2 class="titulo-pagina">Configurações do Sistema</h2>
+  <button class="btn-voltar" onclick="window.location.href='../DashBoard.html'">
+    ← Voltar
+  </button>
+  <div class="section-box">
+    <div class="section-header">
+      <span class="section-icon"> ⚙️ </span>
+      <div>
+        Configurações Gerais<span class="section-desc">
+          Gerencie as configurações do restaurante, categorias de pratos,
+          formas de pagamento e horários de funcionamento.</span>
       </div>
-      <div class="usuario-info">
-        <strong id="headerNomeUsuario"> Carregando... </strong><br /><span
-          id="headerPerfilUsuario"
-        >
-          ...
-        </span>
+    </div>
+  </div>
+  <div class="section-box">
+    <div class="section-header">
+      <span class="section-icon"> 🛵 </span>
+      Configurações de Delivery
+    </div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label> Taxa de Entrega Padrão (R$) </label>
+        <input type="number" id="cfgTaxaEntrega" step="0.01" placeholder="8.00" />
       </div>
-    </header>
-    <h2 class="titulo-pagina">Configurações do Sistema</h2>
-    <button
-      class="btn-voltar"
-      onclick="window.location.href='../DashBoard.html'"
-    >
-      ← Voltar
+      <div class="form-group">
+        <label> Valor Mínimo para Delivery (R$) </label>
+        <input type="number" id="cfgMinimoDelivery" step="0.01" placeholder="30.00" />
+      </div>
+      <div class="form-group">
+        <label> Distância Máxima de Entrega (km) </label>
+        <input type="number" id="cfgDistanciaMax" step="0.1" placeholder="10" />
+      </div>
+      <div class="form-group form-center">
+        <label class="checkbox-group">
+          <input type="checkbox" id="cfgAceitarDelivery" checked />
+          Aceitar Pedidos de Delivery
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="section-box">
+    <div class="section-header">
+      <span class="section-icon"> 🕒 </span>
+      Horário de Funcionamento
+    </div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label> Abertura </label>
+        <input type="time" id="cfgHoraAbertura" value="11:00" />
+      </div>
+      <div class="form-group">
+        <label> Fechamento </label>
+        <input type="time" id="cfgHoraFechamento" value="23:00" />
+      </div>
+    </div>
+    <label class="checkbox-group checkbox-top">
+      <input type="checkbox" id="cfgAceitarNovos" checked />
+      Aceitar Novos Pedidos (Restaurante Aberto)
+    </label>
+  </div>
+  <div class="section-box">
+    <div class="section-header">
+      <span class="section-icon"> 🏷️ </span>
+      Categorias de Pratos
+    </div>
+    <div id="containerCategorias">
+      <!-- Preenchido via JS -->
+    </div>
+    <button type="button" class="btn-adicionar-mock" id="btnAdicionarCategoria">+ Adicionar Nova Categoria</button>
+  </div>
+  <div class="section-box">
+    <div class="section-header">
+      <span class="section-icon"> 💳 </span>
+      Formas de Pagamento
+    </div>
+    <div class="list-item">
+      <strong>Dinheiro</strong>
+      <input type="checkbox" id="chkPagDinheiro" />
+    </div>
+    <div class="list-item">
+      <strong>Cartão de Débito</strong>
+      <input type="checkbox" id="chkPagDebito" />
+    </div>
+    <div class="list-item">
+      <strong>Cartão de Crédito</strong>
+      <input type="checkbox" id="chkPagCredito" />
+    </div>
+    <div class="list-item">
+      <strong>PIX</strong>
+      <input type="checkbox" id="chkPagPix" />
+    </div>
+    <div class="list-item">
+      <strong>Vale Refeição</strong>
+      <input type="checkbox" id="chkPagVR" />
+    </div>
+  </div>
+  <div class="section-box">
+    <div class="section-header">
+      <span class="section-icon"> 👥 </span>
+      Gerenciar Usuários
+    </div>
+    <p class="texto-info">
+      Adicione, edite ou remova usuários do sistema com diferentes níveis de
+      acesso.
+    </p>
+    <button class="btn-salvar" onclick="window.location.href='../Usuarios/Usuarios.html'">
+      Ir para Gestão de Usuários
     </button>
-    <div class="section-box">
-      <div class="section-header">
-        <span class="section-icon"> ⚙️ </span>
-        <div>
-          Configurações Gerais<span class="section-desc">
-            Gerencie as configurações do restaurante, categorias de pratos,
-            formas de pagamento e horários de funcionamento.</span
-          >
-        </div>
-      </div>
-    </div>
-    <div class="section-box">
-      <div class="section-header">
-        <span class="section-icon"> 🛵 </span>
-        Configurações de Delivery
-      </div>
-      <div class="form-grid">
-        <div class="form-group">
-          <label> Taxa de Entrega Padrão (R$) </label>
-          <input
-            type="number"
-            id="cfgTaxaEntrega"
-            step="0.01"
-            placeholder="8.00"
-          />
-        </div>
-        <div class="form-group">
-          <label> Valor Mínimo para Delivery (R$) </label>
-          <input
-            type="number"
-            id="cfgMinimoDelivery"
-            step="0.01"
-            placeholder="30.00"
-          />
-        </div>
-        <div class="form-group">
-          <label> Distância Máxima de Entrega (km) </label>
-          <input
-            type="number"
-            id="cfgDistanciaMax"
-            step="0.1"
-            placeholder="10"
-          />
-        </div>
-        <div class="form-group form-center">
-          <label class="checkbox-group">
-            <input type="checkbox" id="cfgAceitarDelivery" checked />
-            Aceitar Pedidos de Delivery
-          </label>
-        </div>
-      </div>
-    </div>
-    <div class="section-box">
-      <div class="section-header">
-        <span class="section-icon"> 🕒 </span>
-        Horário de Funcionamento
-      </div>
-      <div class="form-grid">
-        <div class="form-group">
-          <label> Abertura </label>
-          <input type="time" id="cfgHoraAbertura" value="11:00" />
-        </div>
-        <div class="form-group">
-          <label> Fechamento </label>
-          <input type="time" id="cfgHoraFechamento" value="23:00" />
-        </div>
-      </div>
-      <label class="checkbox-group checkbox-top">
-        <input type="checkbox" id="cfgAceitarNovos" checked />
-        Aceitar Novos Pedidos (Restaurante Aberto)
-      </label>
-    </div>
-    <div class="section-box">
-      <div class="section-header">
-        <span class="section-icon"> 🏷️ </span>
-        Categorias de Pratos
-      </div>
-      <div id="containerCategorias">
-        <!-- Preenchido via JS -->
-      </div>
-      <button type="button" class="btn-adicionar-mock" id="btnAdicionarCategoria">+ Adicionar Nova Categoria</button>
-    </div>
-    <div class="section-box">
-      <div class="section-header">
-        <span class="section-icon"> 💳 </span>
-        Formas de Pagamento
-      </div>
-      <div class="list-item">
-        <strong>Dinheiro</strong>
-        <input type="checkbox" id="chkPagDinheiro" />
-      </div>
-      <div class="list-item">
-        <strong>Cartão de Débito</strong>
-        <input type="checkbox" id="chkPagDebito" />
-      </div>
-      <div class="list-item">
-        <strong>Cartão de Crédito</strong>
-        <input type="checkbox" id="chkPagCredito" />
-      </div>
-      <div class="list-item">
-        <strong>PIX</strong>
-        <input type="checkbox" id="chkPagPix" />
-      </div>
-      <div class="list-item">
-        <strong>Vale Refeição</strong>
-        <input type="checkbox" id="chkPagVR" />
-      </div>
-    </div>
-    <div class="section-box">
-      <div class="section-header">
-        <span class="section-icon"> 👥 </span>
-        Gerenciar Usuários
-      </div>
-      <p class="texto-info">
-        Adicione, edite ou remova usuários do sistema com diferentes níveis de
-        acesso.
-      </p>
-      <button
-        class="btn-salvar"
-        onclick="window.location.href='../Usuarios/Usuarios.html'"
-      >
-        Ir para Gestão de Usuários
-      </button>
-    </div>
-    <div class="bottom-actions">
-      <button
-        class="btn-cancelar"
-        onclick="window.location.href='../Gerente/DashBoard.html'"
-      >
-        Cancelar
-      </button>
-      <button class="btn-salvar" id="btnSalvarConfig">
-        💾 Salvar Configurações
-      </button>
-    </div>
-    <script type="module" src="./Configuracao.js"></script>
-  </body>
+  </div>
+  <div class="bottom-actions">
+    <button class="btn-cancelar" onclick="window.location.href='../DashBoard.html'">
+      Cancelar
+    </button>
+    <button class="btn-salvar" id="btnSalvarConfig">
+      💾 Salvar Configurações
+    </button>
+  </div>
+  <script type="module" src="./Configuracao.js"></script>
+</body>
+
 </html>
