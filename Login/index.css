@@ -13,6 +13,8 @@ body {
     justify-content: center;
 
     min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 
@@ -26,8 +28,9 @@ body {
 
     margin: 0;
 
-    font-size: 2.5em;
+    font-size: 2.8em;
     letter-spacing: 1px;
+    text-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
 }
 
 .brand-header span {
@@ -40,14 +43,12 @@ body {
     background: #1a1a1a;
 
     border: 1px solid #333;
-    border-radius: 8px;
-
-    padding: 40px;
-
+    border-radius: 16px;
+    padding: 35px 25px;
     width: 100%;
     max-width: 400px;
-
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
 }
 
 .login-box h2 {
@@ -97,9 +98,8 @@ body {
     color: #fff;
 
     border: 1px solid #444;
-    border-radius: 6px;
-
-    padding: 12px 12px 12px 40px;
+    border-radius: 10px;
+    padding: 14px 14px 14px 45px;
 
     font-size: 1em;
 
@@ -116,28 +116,30 @@ body {
 
 
 .btn-entrar {
-    background: #5a1a1a;
-    color: #fff;
+    background: linear-gradient(135deg, #d4af37 0%, #a88520 100%);
+    color: #111;
 
     border: none;
-    border-radius: 6px;
+    border-radius: 10px;
 
-    padding: 15px;
+    padding: 16px;
 
     width: 100%;
 
-    font-size: 1em;
-    font-weight: bold;
+    font-size: 1.1em;
+    font-weight: 800;
 
     cursor: pointer;
 
-    transition: 0.2s;
+    transition: all 0.3s ease;
 
     margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
 }
 
 .btn-entrar:hover {
-    background: #7a2020;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.5);
 }
 
 

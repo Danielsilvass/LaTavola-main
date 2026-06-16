@@ -68,6 +68,34 @@ onSnapshot(configRef, (docSnap) => {
       configAceitaDelivery = cfg.aceitarDelivery;
     if (cfg.restauranteAberto !== undefined)
       configRestauranteAberto = cfg.restauranteAberto;
+      
+    if (cfg.formasPagamento) {
+      const select = document.getElementById("formaPagamento");
+      if (select) {
+        select.innerHTML = "";
+        const nomesMap = {
+          dinheiro: "Dinheiro",
+          debito: "Cartão de Débito",
+          credito: "Cartão de Crédito",
+          pix: "Pix",
+          vr: "Vale Refeição (VR)",
+        };
+        let temOpcao = false;
+        for (const [key, ativo] of Object.entries(cfg.formasPagamento)) {
+          if (ativo) {
+            const opt = document.createElement("option");
+            opt.value = nomesMap[key] || key;
+            opt.innerText = nomesMap[key] || key;
+            select.appendChild(opt);
+            temOpcao = true;
+          }
+        }
+        if (!temOpcao) {
+           select.innerHTML = '<option value="">Nenhuma forma de pagamento configurada</option>';
+        }
+      }
+    }
+
     atualizarInterfaceCarrinho();
   }
 });
@@ -276,6 +304,8 @@ btnFazerPedido.addEventListener("click", async () => {
   const telefone = document.getElementById("clienteTelefone").value;
   const endereco = document.getElementById("clienteEndereco").value;
   const bairro = document.getElementById("clienteBairro").value;
+  const selectPagamento = document.getElementById("formaPagamento");
+  const formaPagamento = selectPagamento ? selectPagamento.value : "Não informada";
 
   if (!nome || !telefone || !endereco) {
     alert("Por favor, preencha os dados de entrega completos!");
@@ -293,6 +323,7 @@ btnFazerPedido.addEventListener("click", async () => {
     cliente: { nome, telefone, endereco, bairro },
     itens: carrinho,
     resumo: { subtotal, taxaEntrega: configTaxaEntrega, total },
+    formaPagamento: formaPagamento,
   };
 
   try {

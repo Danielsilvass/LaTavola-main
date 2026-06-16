@@ -222,3 +222,48 @@ header {
 .dot-opacity {
     opacity: 0.7;
 }
+
+/* Responsividade (Mobile) */
+@media (max-width: 768px) {
+    header {
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .brand h1 {
+        font-size: 1.5em;
+    }
+
+    .usuario-info {
+        text-align: right;
+        background: #2a2a2a;
+        padding: 8px 12px;
+        border-radius: 12px;
+        border: 1px solid #444;
+        font-size: 0.9em;
+    }
+
+    .section-box {
+        padding: 15px;
+    }
+
+    .chart-container {
+        height: 50vh;
+        min-height: 350px;
+    }
+
+    .axis-info {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .axis-info div {
+        align-items: flex-start;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -247,6 +247,9 @@ function criarCardPendente(id, pedido) {
                         <strong style="font-size: 1.2em;">R$ ${Number(
                           total
                         ).toFixed(2)}</strong>
+                        <div style="color: #aaa; font-size: 0.85em; margin-top: 5px;">
+                            💳 Pagamento: ${pedido.formaPagamento || "Não informada"}
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -295,7 +298,8 @@ function criarCardAndamento(id, pedido) {
                 <strong style="color: #d4af37;">R$ ${Number(total).toFixed(
                   2
                 )}</strong><br>
-                <span style="color: #777; font-size: 0.8em;">${subStatus}</span>
+                <span style="color: #777; font-size: 0.8em;">${subStatus}</span><br>
+                <span style="color: #aaa; font-size: 0.75em;">💳 ${pedido.formaPagamento || "-"}</span>
             </div>
         </div>
     `;

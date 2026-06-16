@@ -199,7 +199,7 @@ function criarCardDisponivel(id, pedido, distancia, taxaGanha) {
             <div class="pedido-footer">
                 <span style="color: #aaa;">Total a receber: <strong>R$ ${totalPedido.toFixed(
                   2
-                )}</strong></span>
+                )}</strong><br><span style="font-size: 0.85em;">💳 ${pedido.formaPagamento || "Não informada"}</span></span>
                 <button class="btn-aceitar" data-id="${id}">Aceitar Entrega</button>
             </div>
         </div>
@@ -249,7 +249,8 @@ function criarCardAndamento(id, pedido, distancia, taxaGanha) {
                     <span style="color: #aaa; font-size: 0.8em; display: block;">Total a Cobrar</span>
                     <strong style="color: #d4af37; font-size: 1.2em;">R$ ${totalFinal.toFixed(
                       2
-                    )}</strong>
+                    )}</strong><br>
+                    <span style="color: #aaa; font-size: 0.85em;">💳 ${pedido.formaPagamento || "Não informada"}</span>
                 </div>
             </div>
             
