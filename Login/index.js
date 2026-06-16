@@ -35,13 +35,19 @@ document
     btn.innerText = "Verificando...";
     btn.disabled = true;
 
-    if (
-      emailDigitado === "gerente@restaurante.com" &&
-      senhaDigitada === "123456"
-    ) {
-      localStorage.setItem("usuarioLogado", "Ana Gerente (Padrão)");
-      localStorage.setItem("perfilLogado", "Gerente");
-      window.location.href = "../Gerente/DashBoard.html";
+    const demoUsers = {
+      "recepcao@restaurante.com": { nome: "João Recepção", perfil: "Recepção", url: "../Recepcao/Recepcao.html" },
+      "garcom@restaurante.com": { nome: "Carlos Garçom", perfil: "Garçom", url: "../Garcom/Garcom.html" },
+      "cozinha@restaurante.com": { nome: "Chef Mario", perfil: "Cozinha", url: "../Cozinha/Cozinha.html" },
+      "gerente@restaurante.com": { nome: "Ana Gerente (Padrão)", perfil: "Gerente", url: "../Gerente/DashBoard.html" },
+      "entrega@restaurante.com": { nome: "Beto Entregador", perfil: "Entregador", url: "../Entregador/Entregador.html" }
+    };
+
+    if (senhaDigitada === "123456" && demoUsers[emailDigitado]) {
+      const user = demoUsers[emailDigitado];
+      localStorage.setItem("usuarioLogado", user.nome);
+      localStorage.setItem("perfilLogado", user.perfil);
+      window.location.href = user.url;
       return;
     }
 
