@@ -328,6 +328,9 @@ btnFazerPedido.addEventListener("click", async () => {
 
   try {
     const docRef = await addDoc(pedidosRef, novoPedido);
+    
+    // Mudar o texto para mostrar que o envio foi concluído e está só esperando a recepção aceitar
+    btnFazerPedido.innerText = "Aguardando confirmação...";
 
     // Fica escutando esse pedido específico para ver se a Maria aprova ou recusa
     const unsubscribe = onSnapshot(doc(db, "pedidos", docRef.id), (docSnap) => {
