@@ -329,42 +329,25 @@ btnFazerPedido.addEventListener("click", async () => {
   try {
     const docRef = await addDoc(pedidosRef, novoPedido);
     
-    // Mudar o texto para mostrar que o envio foi concluído e está só esperando a recepção aceitar
-    btnFazerPedido.innerText = "Aguardando confirmação...";
+    // Salvar ID no localStorage para o Tracker
+    localStorage.setItem("meuUltimoPedido", docRef.id);
+    inicializarTracker(); // Inicia a UI do rastreador
 
-    // Fica escutando esse pedido específico para ver se a Maria aprova ou recusa
-    const unsubscribe = onSnapshot(doc(db, "pedidos", docRef.id), (docSnap) => {
-      const dadosPedido = docSnap.data();
+    // Limpar o formulário imediatamente para dar feedback visual rápido
+    alert("Seu pedido foi enviado! Você pode acompanhá-lo no Rastreador que apareceu no canto da tela.");
+    
+    carrinho = [];
+    document.getElementById("clienteNome").value = "";
+    document.getElementById("clienteTelefone").value = "";
+    document.getElementById("clienteEndereco").value = "";
+    document.getElementById("clienteBairro").value = "";
 
-      if (dadosPedido.status === "Pendente") {
-        alert(
-          "Pedido aceito pelo restaurante! A cozinha já está preparando o seu prato."
-        );
+    renderizarCardapio();
+    atualizarInterfaceCarrinho();
+    
+    btnFazerPedido.innerText = "Confirmar Pedido";
+    btnFazerPedido.disabled = false;
 
-        carrinho = [];
-        document.getElementById("clienteNome").value = "";
-        document.getElementById("clienteTelefone").value = "";
-        document.getElementById("clienteEndereco").value = "";
-        document.getElementById("clienteBairro").value = "";
-
-        renderizarCardapio();
-        atualizarInterfaceCarrinho();
-
-        btnFazerPedido.innerText = "Confirmar Pedido";
-        btnFazerPedido.disabled = false;
-
-        unsubscribe();
-      } else if (dadosPedido.status === "Recusado") {
-        alert(
-          "O restaurante não pôde aceitar seu pedido no momento por alta demanda. Por favor, volte mais tarde."
-        );
-
-        btnFazerPedido.innerText = "Confirmar Pedido";
-        btnFazerPedido.disabled = false;
-
-        unsubscribe();
-      }
-    });
   } catch (error) {
     console.error("Erro ao enviar:", error);
     alert("Erro ao conectar com o restaurante. Verifique sua internet.");
@@ -373,5 +356,89 @@ btnFazerPedido.addEventListener("click", async () => {
   }
 });
 
+// --- LÓGICA DO RASTREADOR (TRACKER) ---
+let trackerUnsubscribe = null;
+
+function inicializarTracker() {
+  const pedidoId = localStorage.getItem("meuUltimoPedido");
+  if (!pedidoId) return; // Não há pedido sendo rastreado
+
+  const trackerFlutuante = document.getElementById("trackerFlutuante");
+  const modalTracker = document.getElementById("modalTracker");
+  const btnFecharTracker = document.getElementById("btnFecharTracker");
+  const btnLimparHistorico = document.getElementById("btnLimparHistorico");
+  const trackerStatusResumo = document.getElementById("trackerStatusResumo");
+
+  trackerFlutuante.classList.remove("escondido");
+
+  // Eventos do Modal
+  trackerFlutuante.onclick = () => {
+    modalTracker.classList.remove("escondido");
+  };
+
+  btnFecharTracker.onclick = () => {
+    modalTracker.classList.add("escondido");
+  };
+
+  btnLimparHistorico.onclick = () => {
+    localStorage.removeItem("meuUltimoPedido");
+    modalTracker.classList.add("escondido");
+    trackerFlutuante.classList.add("escondido");
+    if (trackerUnsubscribe) trackerUnsubscribe();
+  };
+
+  // Ficar escutando as mudanças de status no Firebase
+  if (trackerUnsubscribe) trackerUnsubscribe();
+
+  trackerUnsubscribe = onSnapshot(doc(db, "pedidos", pedidoId), (docSnap) => {
+    if (!docSnap.exists()) {
+      trackerStatusResumo.innerText = "Pedido não encontrado";
+      return;
+    }
+
+    const pedido = docSnap.data();
+    atualizarLinhaDoTempo(pedido.status);
+    trackerStatusResumo.innerText = pedido.status;
+
+    // Se finalizou o fluxo, permite limpar o histórico
+    if (pedido.status === "Entregue" || pedido.status === "Recusado") {
+      btnLimparHistorico.classList.remove("escondido");
+    } else {
+      btnLimparHistorico.classList.add("escondido");
+    }
+  });
+}
+
+function atualizarLinhaDoTempo(status) {
+  // Reseta todos
+  document.querySelectorAll(".timeline-item").forEach(item => item.classList.remove("active"));
+
+  // Status mappings
+  const steps = {
+    "Aguardando Aprovação": "stepAprovacao",
+    "Pendente": "stepPreparo", // Pendente significa que a recepção mandou pra cozinha
+    "Em Preparo": "stepPreparo",
+    "Pronto": "stepPronto",
+    "Aguardando Entregador": "stepPronto",
+    "Em Rota": "stepRota",
+    "Entregue": "stepEntregue"
+  };
+
+  // O step atual
+  const stepId = steps[status];
+  
+  if (stepId) {
+    document.getElementById(stepId).classList.add("active");
+  } else if (status === "Recusado") {
+    // Se recusado, destaca o primeiro passo e muda a cor pra vermelho
+    const stepAprov = document.getElementById("stepAprovacao");
+    stepAprov.classList.add("active");
+    stepAprov.querySelector(".step-info strong").innerText = "Pedido Recusado";
+    stepAprov.querySelector(".step-info span").innerText = "O restaurante não pôde aceitar no momento.";
+    stepAprov.querySelector(".step-icon").style.backgroundColor = "#e74c3c";
+  }
+}
+
 // Inicializar
+inicializarTracker();
 carregarProdutos();

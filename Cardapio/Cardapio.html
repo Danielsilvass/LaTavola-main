@@ -77,6 +77,62 @@
         </div>
       </aside>
     </main>
+
+    <!-- Tracker Flutuante -->
+    <div id="trackerFlutuante" class="escondido">
+      <div class="tracker-icone">🛵</div>
+      <div class="tracker-texto">
+        <strong>Acompanhar Pedido</strong>
+        <span id="trackerStatusResumo">Status...</span>
+      </div>
+    </div>
+
+    <!-- Modal do Tracker -->
+    <div id="modalTracker" class="modal-overlay escondido">
+      <div class="modal-tracker-content">
+        <button id="btnFecharTracker" class="btn-fechar">&times;</button>
+        <h2>Status do Pedido</h2>
+        <div class="tracker-timeline">
+          <div class="timeline-item" id="stepAprovacao">
+            <div class="step-icon">🕒</div>
+            <div class="step-info">
+              <strong>Aguardando Aprovação</strong>
+              <span>O restaurante está revisando seu pedido.</span>
+            </div>
+          </div>
+          <div class="timeline-item" id="stepPreparo">
+            <div class="step-icon">🍳</div>
+            <div class="step-info">
+              <strong>Em Preparo</strong>
+              <span>Sua comida está sendo preparada com carinho.</span>
+            </div>
+          </div>
+          <div class="timeline-item" id="stepPronto">
+            <div class="step-icon">🛍️</div>
+            <div class="step-info">
+              <strong>Pronto</strong>
+              <span>Aguardando o entregador coletar.</span>
+            </div>
+          </div>
+          <div class="timeline-item" id="stepRota">
+            <div class="step-icon">🛵</div>
+            <div class="step-info">
+              <strong>Em Rota</strong>
+              <span>O entregador está a caminho da sua casa!</span>
+            </div>
+          </div>
+          <div class="timeline-item" id="stepEntregue">
+            <div class="step-icon">✅</div>
+            <div class="step-info">
+              <strong>Entregue</strong>
+              <span>Bom apetite!</span>
+            </div>
+          </div>
+        </div>
+        <button id="btnLimparHistorico" class="btn-limpar-historico escondido">Finalizar Acompanhamento</button>
+      </div>
+    </div>
+
     <script type="module" src="./Cardapio.js"></script>
   </body>
 </html>
